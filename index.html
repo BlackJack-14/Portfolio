@@ -1,0 +1,5827 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- ═══ TECHNICAL SEO ═══ -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rudra Gupta | AI/ML Developer & Full-Stack Engineer | UPES</title>
+    <meta
+      name="description"
+      content="Rudra Gupta — B.Tech AI/ML student at UPES, Technical Head at UPES-CSA. Building LLMs, RAG systems, and full-stack applications. Open to internships."
+    />
+    <link rel="canonical" href="https://rudra-gupta.wordpress.com/" />
+    <meta
+      property="og:title"
+      content="Rudra Gupta | AI/ML Developer & Full-Stack Engineer"
+    />
+    <meta
+      property="og:description"
+      content="Portfolio of Rudra Gupta — AI/ML developer, Technical Head at UPES-CSA, LLM fine-tuning & RAG specialist."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="keywords"
+      content="Rudra Gupta, AI ML developer portfolio, LLM fine-tuning LoRA, RAG system developer India, UPES CSA, full stack AI engineer"
+    />
+
+    <!-- Schema: Person -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Rudra Gupta",
+        "jobTitle": "B.Tech AI/ML Student & Technical Head",
+        "description": "AI/ML developer specializing in LLMs, RAG systems, computer vision and full-stack development",
+        "url": "https://rudra-gupta.wordpress.com",
+        "email": "rudragupta0123@gmail.com",
+        "sameAs": [
+          "https://linkedin.com/in/rudra-gupta",
+          "https://github.com/BlackJack-14"
+        ],
+        "knowsAbout": [
+          "Machine Learning",
+          "Large Language Models",
+          "RAG",
+          "LoRA Fine-Tuning",
+          "React.js",
+          "Computer Vision",
+          "PyTorch",
+          "Docker",
+          "AWS"
+        ]
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Three.js for 3D hero geometry -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+      /* ═══════════════════════════════════════════
+   DESIGN SYSTEM — Neural Noir
+═══════════════════════════════════════════ */
+      :root {
+        --void: #0c0c0f;
+        --deep: rgba(14, 14, 18, 0.92);
+        --surface: rgba(18, 18, 24, 0.88);
+        --panel: rgba(22, 22, 30, 0.92);
+        --border: rgba(255, 255, 255, 0.06);
+        --border2: rgba(255, 255, 255, 0.04);
+        --accent: #5b9cf5;
+        --accent-dim: #4a85d4;
+        --accent-glow: rgba(91, 156, 245, 0.12);
+        --accent-warm: #c9a84c;
+        --accent-warm-dim: #a8893d;
+        --accent-warm-glow: rgba(201, 168, 76, 0.12);
+        --cyan: #5b9cf5;
+        --orange: #e8915a;
+        --green: #6ec87a;
+        --text: #a8a5a0;
+        --text-bright: #f0eeeb;
+        --muted: #6b6966;
+        --font-d: "Manrope", sans-serif;
+        --font-b: "Manrope", sans-serif;
+        --font-m: "JetBrains Mono", monospace;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        background: var(--void);
+        color: var(--text);
+        font-family: var(--font-d);
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* ─── CUSTOM CURSOR (mouse only) ─── */
+      @media (pointer: fine) {
+        *,
+        *::before,
+        *::after {
+          cursor: none !important;
+        }
+      }
+      #cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.15s,
+          height 0.15s,
+          background 0.15s;
+        mix-blend-mode: difference;
+      }
+      #cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition:
+          width 0.25s ease,
+          height 0.25s ease,
+          border-color 0.25s,
+          background 0.25s;
+      }
+      #cursor-glow {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(
+          circle,
+          rgba(91, 156, 245, 0.08) 0%,
+          rgba(201, 168, 76, 0.03) 40%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s;
+      }
+      #cursor-ring.hover {
+        width: 56px;
+        height: 56px;
+        border-color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.04);
+      }
+      #cursor-dot.hover {
+        width: 4px;
+        height: 4px;
+        background: #fff;
+      }
+      @media (pointer: coarse) {
+        #cursor-dot,
+        #cursor-ring,
+        #cursor-glow {
+          display: none;
+        }
+        *,
+        *::before,
+        *::after {
+          cursor: auto !important;
+        }
+      }
+
+      /* ─── ANIMATED BACKGROUND ─── */
+      #particle-bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      #particle-bg canvas {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ─── NAVIGATION ─── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 800;
+        padding: 0 clamp(1rem, 5vw, 4rem);
+        height: 68px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition:
+          background 0.4s,
+          border-color 0.4s;
+        border-bottom: 1px solid transparent;
+      }
+      nav.scrolled {
+        background: rgba(12, 12, 15, 0.95);
+        border-color: var(--border2);
+      }
+      .nav-logo {
+        font-family: var(--font-d);
+        font-weight: 800;
+        font-size: 1.1rem;
+        color: #00ff41;
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nav-logo-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        font-family: var(--font-m);
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-decoration: none;
+        letter-spacing: 0.05em;
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+        transform-origin: left;
+      }
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-cta {
+        font-family: var(--font-d);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border: 1px solid #0a66c2;
+        color: #0a66c2;
+        padding: 0.5rem 1.4rem;
+        border-radius: 3px;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          color 0.2s,
+          box-shadow 0.2s,
+          border-color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .nav-cta:hover {
+        background: #0a66c2;
+        color: #fff;
+        border-color: #0a66c2;
+      }
+
+      /* Hamburger */
+      .nav-hamburger {
+        display: none;
+        width: 28px;
+        height: 20px;
+        position: relative;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--text-bright);
+        position: absolute;
+        left: 0;
+        transition: all 0.3s ease;
+      }
+      .nav-hamburger span:nth-child(1) {
+        top: 0;
+      }
+      .nav-hamburger span:nth-child(2) {
+        top: 9px;
+      }
+      .nav-hamburger span:nth-child(3) {
+        top: 18px;
+      }
+      .nav-hamburger.open span:nth-child(1) {
+        top: 9px;
+        transform: rotate(45deg);
+      }
+      .nav-hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-hamburger.open span:nth-child(3) {
+        top: 9px;
+        transform: rotate(-45deg);
+      }
+
+      /* Mobile menu overlay */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 799;
+        background: rgba(12, 12, 15, 0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      .mobile-menu.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .mobile-menu a {
+        font-family: var(--font-d);
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-bright);
+        text-decoration: none;
+        letter-spacing: 0.02em;
+        transition: color 0.2s;
+      }
+      .mobile-menu a:hover {
+        color: var(--accent);
+      }
+
+      /* ─── HERO ─── */
+      #home {
+        min-height: 100vh;
+        padding: 120px clamp(1.5rem, 8vw, 8rem) 80px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 4rem;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        will-change: transform, opacity;
+        transform-origin: center center;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+      }
+      #home::before {
+        display: none;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: var(--font-m);
+        font-size: 0.78rem;
+        color: #00ff41;
+        text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+        border: 1px solid rgba(0, 255, 136, 0.25);
+        padding: 0.5rem 1.2rem;
+        border-radius: 3px;
+        margin-bottom: 2.2rem;
+        background: rgba(0, 255, 65, 0.04);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.06);
+      }
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--green);
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+      }
+
+      /* H1 */
+      h1.hero-title {
+        font-family: var(--font-d);
+        font-size: clamp(3.2rem, 6vw, 5.5rem);
+        font-weight: 900;
+        line-height: 0.92;
+        letter-spacing: -0.04em;
+        color: var(--text-bright);
+        margin-bottom: 1.4rem;
+      }
+
+      .hero-title-glow {
+        display: block;
+        color: var(--accent);
+        margin-top: 0.3rem;
+        padding-left: 42%;
+      }
+
+      .hero-role {
+        font-family: var(--font-m);
+        font-size: clamp(0.78rem, 1.1vw, 0.9rem);
+        color: var(--accent);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 1.8rem;
+      }
+
+      .hero-desc {
+        font-size: 1.15rem;
+        color: var(--text);
+        max-width: 520px;
+        margin-bottom: 2.5rem;
+        line-height: 1.8;
+      }
+      .hero-desc strong {
+        color: var(--text-bright);
+        font-weight: 600;
+      }
+
+      .hero-btns {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        font-family: var(--font-d);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--accent);
+        color: var(--void);
+        padding: 0.85rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(91, 156, 245, 0.15);
+      }
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: transform 0.4s;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(91, 156, 245, 0.3);
+        background: #6baaff;
+      }
+      .btn-primary:hover::before {
+        transform: translateX(100%);
+      }
+
+      .btn-outline {
+        font-family: var(--font-d);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: transparent;
+        color: var(--text);
+        padding: 0.85rem 2rem;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+        text-decoration: none;
+        transition: all 0.25s;
+      }
+      .btn-outline:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: rgba(91, 156, 245, 0.05);
+      }
+
+      /* Hero terminal card — hacker theme */
+      .hero-terminal {
+        background: #0a0e0a;
+        border: 1px solid rgba(0, 255, 65, 0.12);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow:
+          0 0 40px rgba(0, 255, 65, 0.06),
+          0 20px 60px rgba(0, 0, 0, 0.5);
+        transform-style: preserve-3d;
+        transform: translateZ(20px);
+        animation: float3d 6s 1.1s ease-in-out infinite;
+        position: relative;
+      }
+      .hero-terminal::before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: 20%;
+        right: 20%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 255, 65, 0.4),
+          transparent
+        );
+        z-index: 1;
+      }
+      .hero-terminal::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, 0.06) 2px,
+          rgba(0, 0, 0, 0.06) 4px
+        );
+        pointer-events: none;
+        border-radius: 10px;
+      }
+      @keyframes float3d {
+        0%,
+        100% {
+          transform: translateZ(20px) translateY(0);
+        }
+        50% {
+          transform: translateZ(30px) translateY(-6px);
+        }
+      }
+      .terminal-bar {
+        background: #0d120d;
+        padding: 0.75rem 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.08);
+      }
+      .t-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+      }
+      .t-dot.r {
+        background: #ff5f57;
+      }
+      .t-dot.y {
+        background: #ffbd2e;
+      }
+      .t-dot.g {
+        background: #00ff41;
+      }
+      .terminal-title {
+        font-family: var(--font-m);
+        font-size: 0.65rem;
+        color: rgba(0, 255, 65, 0.35);
+        margin-left: 0.6rem;
+      }
+      .terminal-body {
+        padding: 1.4rem 1.5rem;
+        background: #080c08;
+      }
+      .t-line {
+        font-family: var(--font-m);
+        font-size: 0.75rem;
+        margin-bottom: 0.45rem;
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        opacity: 0;
+      }
+      .t-line.show {
+        opacity: 1;
+        transition: opacity 0.3s;
+      }
+      .t-prompt {
+        color: #00ff41;
+        flex-shrink: 0;
+      }
+      .t-cmd {
+        color: #00cc33;
+      }
+      .t-val {
+        color: #00ff41;
+        text-shadow: 0 0 8px rgba(0, 255, 65, 0.25);
+      }
+      .t-comment {
+        color: rgba(0, 255, 65, 0.3);
+        font-style: italic;
+      }
+      .t-cursor {
+        display: inline-block;
+        width: 7px;
+        height: 13px;
+        background: #00ff41;
+        animation: blink 1s step-end infinite;
+        vertical-align: middle;
+        box-shadow: 0 0 6px rgba(0, 255, 65, 0.5);
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* stats row */
+      .hero-stats {
+        display: flex;
+        gap: 3rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border2);
+      }
+      .hero-stats > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .stat-n {
+        font-family: var(--font-d);
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--accent-warm);
+        line-height: 1;
+      }
+      .stat-l {
+        font-family: var(--font-m);
+        font-size: 0.62rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      /* ─── SECTION BASE ─── */
+      section {
+        padding: 100px clamp(1.5rem, 8vw, 8rem);
+        position: relative;
+        z-index: 1;
+      }
+      section + section {
+        border-top: 1px solid var(--border);
+      }
+
+      .sec-tag {
+        font-family: var(--font-m);
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.7rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .sec-tag::before {
+        content: "";
+        height: 1px;
+        width: 40px;
+        background: var(--accent);
+      }
+
+      /* H2 */
+      h2.sec-title {
+        font-family: var(--font-d);
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        font-weight: 800;
+        color: var(--text-bright);
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+      }
+      .sec-sub {
+        color: var(--muted);
+        font-size: 1rem;
+        max-width: 560px;
+        margin-bottom: 3.5rem;
+      }
+
+      /* ─── ABOUT ─── */
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: start;
+      }
+
+      .about-text p {
+        color: var(--muted);
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+      }
+      .about-text p strong {
+        color: var(--text);
+      }
+      .about-text a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      /* H3 */
+      h3.sub {
+        font-family: var(--font-d);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-bright);
+        margin: 2rem 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      h3.sub::before {
+        content: "▸";
+        color: var(--accent);
+        font-size: 0.8rem;
+      }
+
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .tl-item {
+        padding: 1.2rem 1.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border2);
+        border-left: 2px solid var(--cyan);
+        border-radius: 0 8px 8px 0;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .tl-item:hover {
+        border-left-color: var(--orange);
+        transform: translateX(4px);
+      }
+      .tl-yr {
+        font-family: var(--font-m);
+        font-size: 0.66rem;
+        color: var(--accent-warm);
+        margin-bottom: 0.3rem;
+      }
+      .tl-t {
+        font-family: var(--font-d);
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--text-bright);
+      }
+      .tl-o {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      /* ─── SKILLS ─── */
+      .skill-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .skill-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--cyan), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .skill-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-5px);
+        box-shadow:
+          0 15px 40px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(91, 156, 245, 0.05);
+      }
+      .skill-card:hover::before {
+        opacity: 1;
+      }
+
+      .skill-group-title {
+        font-family: var(--font-d);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-bright);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .skill-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-warm);
+        font-size: 1.2rem;
+      }
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      .pill {
+        font-family: var(--font-m);
+        font-size: 0.72rem;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        color: var(--muted);
+        transition: all 0.2s;
+        cursor: default;
+      }
+      .pill:hover {
+        background: var(--accent-warm-glow);
+        border-color: var(--accent-warm);
+        color: var(--accent-warm);
+        transform: translateY(-2px);
+      }
+      .pill.hot {
+        background: rgba(91, 156, 245, 0.05);
+        border-color: rgba(91, 156, 245, 0.25);
+        color: var(--text-bright);
+      }
+
+      /* ─── EXPERIENCE ─── */
+      .exp-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+      }
+      .exp-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.8rem 2rem;
+        transition:
+          border-color 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .exp-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--green), transparent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s;
+      }
+      .exp-card:hover {
+        border-color: var(--green);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 255, 136, 0.15);
+      }
+      .exp-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .exp-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .exp-role {
+        font-family: var(--font-d);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-bright);
+      }
+      .exp-company {
+        font-family: var(--font-m);
+        font-size: 0.72rem;
+        color: var(--accent-warm);
+        margin-top: 0.2rem;
+      }
+      .exp-period {
+        font-family: var(--font-m);
+        font-size: 0.68rem;
+        color: var(--muted);
+      }
+      .exp-bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .exp-bullets li {
+        font-size: 0.9rem;
+        color: var(--muted);
+        padding-left: 1.4rem;
+        position: relative;
+      }
+      .exp-bullets li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent-warm);
+        font-size: 0.8rem;
+      }
+      .exp-bullets li strong {
+        color: var(--text);
+      }
+
+      /* ─── PROJECTS ─── */
+
+      .proj-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+      .proj-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-6px);
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(91, 156, 245, 0.08);
+      }
+
+      .proj-header {
+        padding: 2rem 2rem 1.5rem;
+        border-bottom: 1px solid var(--border2);
+        position: relative;
+      }
+      .proj-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+      .pi1 {
+        background: linear-gradient(135deg, #00263d, #004d7a);
+      }
+      .pi2 {
+        background: linear-gradient(135deg, #0d2500, #1a4d00);
+      }
+      .pi3 {
+        background: linear-gradient(135deg, #2d0a00, #5c1500);
+      }
+      .pi4 {
+        background: linear-gradient(135deg, #1a0033, #3d0066);
+      }
+      .pi5 {
+        background: linear-gradient(135deg, #001a2d, #002b4a);
+      }
+
+      .proj-status {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-family: var(--font-m);
+        font-size: 0.62rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 2px;
+      }
+      .status-live {
+        background: rgba(0, 255, 136, 0.1);
+        color: var(--green);
+        border: 1px solid rgba(0, 255, 136, 0.2);
+      }
+      .status-ongoing {
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--accent-warm);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+      }
+
+      /* H3 for project name */
+      .proj-card h3 {
+        font-family: var(--font-d);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-bright);
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+      }
+      .proj-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.8rem;
+      }
+      .stack-tag {
+        font-family: var(--font-m);
+        font-size: 0.6rem;
+        padding: 0.2rem 0.55rem;
+        border-radius: 2px;
+        background: var(--panel);
+        color: var(--muted);
+        border: 1px solid var(--border2);
+      }
+      .proj-body {
+        padding: 1.5rem 2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .proj-desc {
+        font-size: 0.88rem;
+        color: var(--muted);
+        flex: 1;
+        margin-bottom: 1rem;
+      }
+      .proj-link {
+        font-family: var(--font-m);
+        font-size: 0.7rem;
+        color: var(--accent-warm);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: gap 0.2s;
+      }
+      .proj-link:hover {
+        gap: 0.7rem;
+      }
+
+      /* ─── ACHIEVEMENTS ─── */
+      #achievements {
+      }
+
+      .ach-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+        gap: 1rem;
+      }
+      .ach-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1.5rem 1.8rem;
+        display: flex;
+        gap: 1.2rem;
+        align-items: flex-start;
+        transition:
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .ach-card:hover {
+        border-color: var(--green);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 255, 136, 0.1);
+      }
+      .ach-icon {
+        font-size: 1.6rem;
+        margin-top: 0.1rem;
+      }
+      .ach-title {
+        font-family: var(--font-d);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-bright);
+        margin-bottom: 0.3rem;
+      }
+      .ach-desc {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      /* ─── ARTICLES ─── */
+
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+        gap: 2rem;
+      }
+      .art-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+        text-decoration: none;
+        display: block;
+        transition: all 0.3s ease;
+      }
+      .art-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-5px);
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.6);
+      }
+
+      .art-thumb {
+        height: 200px;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .thumb1 {
+        background: linear-gradient(
+          135deg,
+          #000d1a 0%,
+          #001f3d 40%,
+          #003366 100%
+        );
+      }
+      .thumb2 {
+        background: linear-gradient(
+          135deg,
+          #0a0005 0%,
+          #1a0030 40%,
+          #2d004d 100%
+        );
+      }
+      .art-thumb-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 4rem;
+        opacity: 0.15;
+      }
+      .art-cat {
+        font-family: var(--font-m);
+        font-size: 0.65rem;
+        color: var(--accent-warm);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        background: rgba(91, 156, 245, 0.1);
+        border: 1px solid rgba(91, 156, 245, 0.2);
+        padding: 0.3rem 0.7rem;
+        border-radius: 2px;
+        position: relative;
+        z-index: 1;
+      }
+      .art-meta {
+        padding: 1.5rem;
+      }
+      .art-card h3 {
+        font-family: var(--font-d);
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-bright);
+        line-height: 1.35;
+        margin-bottom: 0.7rem;
+      }
+      .art-card p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+      .art-footer {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-m);
+        font-size: 0.68rem;
+        color: var(--muted);
+      }
+      .art-read {
+        color: var(--accent-warm);
+      }
+
+      /* ─── CONTACT ─── */
+      #contact {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      #contact .sec-tag {
+        justify-content: center;
+      }
+      #contact .sec-tag::before {
+        display: none;
+      }
+      #contact .sec-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contact-grid {
+        display: block;
+        width: 100%;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .contact-text p {
+        color: var(--muted);
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+      }
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: left;
+      }
+      .c-link {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.2rem 2rem;
+        text-decoration: none;
+        transition: all 0.2s;
+        min-width: 0;
+      }
+      .c-link:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      }
+      .c-link-email:hover { border-color: #e8915a; }
+      .c-link-linkedin:hover { border-color: #0a66c2; }
+      .c-link-github:hover { border-color: #f0eeeb; }
+      .c-link-phone:hover { border-color: #00ff41; }
+      .c-link-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: var(--panel);
+        border: 1px solid var(--border2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        color: var(--accent-warm);
+      }
+      .c-link-label {
+        font-family: var(--font-d);
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-bright);
+      }
+      .c-link-val {
+        font-family: var(--font-m);
+        font-size: 0.75rem;
+        color: var(--muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .fg label {
+        display: block;
+        font-family: var(--font-m);
+        font-size: 0.67rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+      }
+      .fg input,
+      .fg textarea {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.9rem 1.2rem;
+        color: var(--text-bright);
+        font-family: var(--font-b);
+        font-size: 0.95rem;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        outline: none;
+      }
+      .fg input:focus,
+      .fg textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(91, 156, 245, 0.1);
+      }
+      .fg textarea {
+        height: 120px;
+        resize: vertical;
+      }
+      .form-btn {
+        font-family: var(--font-d);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--cyan);
+        color: var(--void);
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.25s;
+      }
+      .form-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(91, 156, 245, 0.35);
+      }
+
+      /* ─── FOOTER ─── */
+      footer {
+        padding: 2.5rem clamp(1.5rem, 8vw, 8rem);
+        border-top: 1px solid var(--border2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+      .foot-copy {
+        font-family: var(--font-m);
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+      .foot-links {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .foot-links a {
+        font-family: var(--font-m);
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .foot-links a:hover {
+        color: var(--accent);
+      }
+
+      /* ─── ARTICLE PAGES ─── */
+      .article-page {
+        display: none;
+        position: relative;
+        z-index: 1;
+        padding-top: 68px;
+      }
+      .article-page.active {
+        display: block;
+      }
+
+      .art-pg-header {
+        padding: 70px clamp(1.5rem, 8vw, 10rem) 60px;
+        background: var(--deep);
+        border-bottom: 1px solid var(--border2);
+      }
+      .art-breadcrumb {
+        font-family: var(--font-m);
+        font-size: 0.7rem;
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+      }
+      .art-breadcrumb a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      /* Article H1 */
+      h1.art-pg-title {
+        font-family: var(--font-d);
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+        font-weight: 800;
+        color: var(--text-bright);
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        max-width: 860px;
+      }
+      .art-pg-info {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        font-family: var(--font-m);
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
+      .art-pg-body-wrap {
+        padding: 60px clamp(1.5rem, 8vw, 10rem);
+      }
+      .art-pg-body {
+        max-width: 760px;
+      }
+
+      /* Article H2 */
+      .art-pg-body h2 {
+        font-family: var(--font-d);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-bright);
+        letter-spacing: -0.02em;
+        margin: 2.5rem 0 1rem;
+      }
+      /* Article H3 */
+      .art-pg-body h3 {
+        font-family: var(--font-d);
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--cyan-dim);
+        margin: 2rem 0 0.7rem;
+      }
+      .art-pg-body p {
+        color: var(--muted);
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+        line-height: 1.85;
+      }
+      .art-pg-body p strong {
+        color: var(--text);
+      }
+      .art-pg-body ul {
+        margin: 1rem 0 1.5rem 1rem;
+        color: var(--muted);
+      }
+      .art-pg-body ul li {
+        margin-bottom: 0.6rem;
+        padding-left: 0.5rem;
+      }
+      .art-pg-body ul li strong {
+        color: var(--text);
+      }
+      .art-pg-body a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      /* Snippet box */
+      .snippet {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--cyan);
+        border-radius: 0 8px 8px 0;
+        padding: 1.5rem 2rem;
+        margin: 2rem 0;
+      }
+      .snippet-lbl {
+        font-family: var(--font-m);
+        font-size: 0.62rem;
+        color: var(--accent-warm);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.8rem;
+      }
+      .snippet p {
+        margin: 0;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      /* Code block */
+      .code-block {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        font-family: var(--font-m);
+        font-size: 0.78rem;
+        color: #a8d8ea;
+        overflow-x: auto;
+        line-height: 1.7;
+      }
+      .code-comment {
+        color: var(--muted);
+      }
+      .code-key {
+        color: var(--accent-warm);
+      }
+      .code-val {
+        color: var(--green);
+      }
+
+      /* Internal CTA */
+      .int-cta {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.8rem 2rem;
+        margin: 2.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+      .int-cta p {
+        color: var(--text);
+        font-size: 0.95rem;
+        margin: 0;
+      }
+      .int-cta strong {
+        color: var(--accent-warm);
+      }
+
+      /* FAQ */
+      .faq {
+        margin-top: 3rem;
+      }
+      .faq-item {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.8rem;
+        overflow: hidden;
+      }
+      .faq-q {
+        width: 100%;
+        background: var(--surface);
+        border: none;
+        padding: 1.2rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.2s;
+      }
+      .faq-q:hover {
+        background: var(--panel);
+      }
+      .faq-q span {
+        font-family: var(--font-d);
+        font-size: 0.93rem;
+        font-weight: 600;
+        color: var(--text-bright);
+      }
+      .faq-toggle {
+        color: var(--accent-warm);
+        font-size: 1.2rem;
+        transition: transform 0.3s;
+        font-family: var(--font-m);
+      }
+      .faq-item.open .faq-toggle {
+        transform: rotate(45deg);
+      }
+      .faq-a {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+        background: var(--deep);
+      }
+      .faq-item.open .faq-a {
+        max-height: 300px;
+      }
+      .faq-a p {
+        padding: 1.2rem 1.5rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0;
+      }
+
+      /* ─── ANIMATIONS ─── */
+      /* riseUp removed — GSAP handles entrance animations */
+      @keyframes scanLine {
+        0% {
+          top: -2px;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+
+      /* ═══════════════════════════════════════════
+   NEW SECTIONS — Bento, Staircase, Ladder
+═══════════════════════════════════════════ */
+
+      /* ─── ABOUT ME BENTO GRID ─── */
+      #about-me {
+      }
+
+      .bento-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 1rem;
+      }
+      .bento-cell {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .bento-cell:hover {
+        border-color: rgba(91, 156, 245, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      }
+      .bento-cell.span-2 {
+        grid-column: span 2;
+      }
+      .bento-cell.span-full {
+        grid-column: 1/-1;
+      }
+      .bento-cell.tall {
+        grid-row: span 2;
+      }
+
+      /* Bio card */
+      .bento-cell.bio-card {
+        background: var(--surface);
+      }
+
+      .bento-label {
+        font-family: var(--font-m);
+        font-size: 0.6rem;
+        color: var(--accent-warm);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .bento-label::before {
+        content: "";
+        width: 16px;
+        height: 1px;
+        background: var(--accent-warm);
+        opacity: 0.5;
+      }
+      .bento-title {
+        font-family: var(--font-d);
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--text-bright);
+        margin-bottom: 0.6rem;
+        letter-spacing: -0.02em;
+      }
+      .bento-text {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+      .bento-text strong {
+        color: var(--text-bright);
+        font-weight: 600;
+      }
+
+      /* Stats — vertical stack, bigger numbers */
+      .bento-facts {
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
+      }
+      .bento-fact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .bento-fact-val {
+        font-family: var(--font-d);
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      .bento-fact-label {
+        font-family: var(--font-m);
+        font-size: 0.6rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+      .bento-fact + .bento-fact {
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--border2);
+      }
+
+      .bento-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.8rem;
+      }
+      .bento-tag {
+        font-family: var(--font-m);
+        font-size: 0.64rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 4px;
+        background: rgba(91, 156, 245, 0.05);
+        border: 1px solid rgba(91, 156, 245, 0.12);
+        color: var(--text);
+        transition: all 0.2s;
+      }
+      .bento-tag:hover {
+        background: rgba(91, 156, 245, 0.1);
+        border-color: rgba(91, 156, 245, 0.3);
+        color: var(--accent);
+      }
+
+      /* Highlight items — numbered columns */
+      .hl-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 0.5rem;
+      }
+      .hl-item {
+        padding: 1.2rem 1.4rem;
+        border-right: 1px solid var(--border2);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .hl-item:last-child {
+        border-right: none;
+      }
+      .hl-num {
+        font-family: var(--font-d);
+        font-size: 1.6rem;
+        font-weight: 800;
+        opacity: 0.35;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      .hl-text {
+        font-size: 0.85rem;
+        color: var(--text);
+        line-height: 1.5;
+      }
+      @media (max-width: 960px) {
+        .hl-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hl-item {
+          border-right: none;
+          padding: 1rem 0;
+        }
+        .hl-item:nth-child(odd) {
+          border-right: 1px solid var(--border2);
+        }
+        .hl-item:nth-child(4) {
+          border-bottom: none;
+        }
+      }
+      @media (max-width: 540px) {
+        .hl-grid {
+          grid-template-columns: 1fr;
+        }
+        .hl-item {
+          border-right: none !important;
+          border-bottom: 1px solid var(--border2);
+          padding: 1rem 0;
+        }
+        .hl-item:last-child {
+          border-bottom: none;
+        }
+      }
+
+      /* Bento ambient glow */
+      .bento-cell::after {
+        content: "";
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(
+          circle,
+          rgba(91, 156, 245, 0.05),
+          transparent 70%
+        );
+        border-radius: 50%;
+        pointer-events: none;
+        top: -40px;
+        right: -40px;
+        transition: opacity 0.3s;
+        opacity: 0;
+      }
+      .bento-cell:hover::after {
+        opacity: 1;
+      }
+
+      /* ─── MY JOURNEY — TIMELINE ─── */
+      .timeline-wrap {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* Central vertical line */
+      .timeline-wrap::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          var(--cyan),
+          var(--green),
+          var(--orange),
+          var(--cyan)
+        );
+        opacity: 0.2;
+        transform: translateX(-50%);
+      }
+
+      .tl-node {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 60px 1fr;
+        align-items: start;
+        margin-bottom: 2.5rem;
+      }
+      .tl-node.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Dot on the center line */
+      .tl-dot-wrap {
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+        padding-top: 1.8rem;
+      }
+      .tl-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid var(--cyan);
+        background: var(--void);
+        transition: all 0.3s;
+        position: relative;
+        z-index: 2;
+      }
+      .tl-node:hover .tl-dot {
+        background: var(--cyan);
+        box-shadow: 0 0 12px rgba(91, 156, 245, 0.25);
+      }
+
+      /* Odd = left side content, Even = right side content */
+      .tl-node:nth-child(odd) .tl-card {
+        grid-column: 1;
+        text-align: right;
+        padding-right: 2rem;
+      }
+      .tl-node:nth-child(odd) .tl-empty {
+        grid-column: 3;
+      }
+      .tl-node:nth-child(even) .tl-card {
+        grid-column: 3;
+        text-align: left;
+        padding-left: 2rem;
+      }
+      .tl-node:nth-child(even) .tl-empty {
+        grid-column: 1;
+      }
+
+      /* Color alternation */
+      .tl-node:nth-child(odd) .tl-dot {
+        border-color: var(--green);
+      }
+      .tl-node:nth-child(odd):hover .tl-dot {
+        background: var(--green);
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+      }
+      .tl-node:nth-child(3n) .tl-dot {
+        border-color: var(--orange);
+      }
+      .tl-node:nth-child(3n):hover .tl-dot {
+        background: var(--orange);
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+      }
+
+      .tl-year {
+        font-family: var(--font-m);
+        font-size: 0.65rem;
+        color: var(--accent-warm);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .tl-title {
+        font-family: var(--font-d);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--text-bright);
+        margin-bottom: 0.3rem;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+      }
+      .tl-sub {
+        font-family: var(--font-m);
+        font-size: 0.72rem;
+        color: var(--cyan-dim);
+        margin-bottom: 0.6rem;
+      }
+      .tl-desc {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      /* Mobile: single column */
+      @media (max-width: 768px) {
+        .timeline-wrap::before {
+          left: 20px;
+        }
+        .tl-node {
+          grid-template-columns: 40px 1fr;
+        }
+        .tl-dot-wrap {
+          grid-column: 1;
+          justify-content: center;
+          padding-top: 1.6rem;
+        }
+        .tl-node:nth-child(odd) .tl-card,
+        .tl-node:nth-child(even) .tl-card {
+          grid-column: 2;
+          text-align: left;
+          padding-right: 0;
+          padding-left: 1.2rem;
+        }
+        .tl-node:nth-child(odd) .tl-empty,
+        .tl-node:nth-child(even) .tl-empty {
+          display: none;
+        }
+      }
+
+      /* ─── SKILLS — CATEGORY CARDS ─── */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+
+      .skill-category {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.8rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .skill-category:hover {
+        border-color: rgba(91, 156, 245, 0.2);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Top accent bar */
+      .skill-category::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        opacity: 0.7;
+      }
+
+      .skill-cat-header {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-bottom: 1.2rem;
+      }
+      .skill-cat-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 800;
+        font-family: var(--font-d);
+        letter-spacing: -0.02em;
+      }
+      .skill-cat-name {
+        font-family: var(--font-d);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-bright);
+      }
+      .skill-cat-count {
+        font-family: var(--font-m);
+        font-size: 0.55rem;
+        color: var(--muted);
+        margin-left: auto;
+        padding: 0.15rem 0.5rem;
+        border-radius: 3px;
+        background: var(--panel);
+        border: 1px solid var(--border2);
+      }
+
+      /* Skill pills */
+      .skill-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .skill-pill {
+        font-family: var(--font-m);
+        font-size: 0.68rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 5px;
+        border: 1px solid var(--border2);
+        color: var(--muted);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+      }
+      .skill-pill::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: var(--prof, 0%);
+        transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+      }
+      .skill-pill.filled::before {
+        width: var(--prof, 0%);
+      }
+      .skill-pill:hover {
+        transform: translateY(-1px);
+      }
+
+      /* Pill proficiency levels */
+      .skill-pill.core {
+        background: rgba(91, 156, 245, 0.06);
+        border-color: rgba(91, 156, 245, 0.18);
+        color: var(--text-bright);
+      }
+      .skill-pill.solid {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: var(--border2);
+        color: var(--text);
+      }
+
+      /* Category accent colors — blue + gold system */
+      .cat-lang::before {
+        background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+      }
+      .cat-lang .skill-cat-icon {
+        background: rgba(91, 156, 245, 0.1);
+        color: var(--accent);
+        border: 1px solid rgba(91, 156, 245, 0.2);
+      }
+      .cat-lang .skill-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .cat-lang .skill-pill::before {
+        background: var(--accent);
+      }
+      .cat-lang .skill-pill.core {
+        background: rgba(91, 156, 245, 0.06);
+        border-color: rgba(91, 156, 245, 0.2);
+      }
+
+      .cat-ai::before {
+        background: linear-gradient(
+          90deg,
+          var(--accent-warm),
+          var(--accent-warm-dim)
+        );
+      }
+      .cat-ai .skill-cat-icon {
+        background: rgba(201, 168, 76, 0.1);
+        color: var(--accent-warm);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+      }
+      .cat-ai .skill-pill:hover {
+        border-color: var(--accent-warm);
+        color: var(--accent-warm);
+      }
+      .cat-ai .skill-pill::before {
+        background: var(--accent-warm);
+      }
+      .cat-ai .skill-pill.core {
+        background: rgba(201, 168, 76, 0.06);
+        border-color: rgba(201, 168, 76, 0.2);
+      }
+
+      .cat-web::before {
+        background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+      }
+      .cat-web .skill-cat-icon {
+        background: rgba(91, 156, 245, 0.08);
+        color: var(--accent);
+        border: 1px solid rgba(91, 156, 245, 0.15);
+      }
+      .cat-web .skill-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .cat-web .skill-pill::before {
+        background: var(--accent);
+      }
+      .cat-web .skill-pill.core {
+        background: rgba(91, 156, 245, 0.06);
+        border-color: rgba(91, 156, 245, 0.2);
+      }
+
+      .cat-data::before {
+        background: linear-gradient(90deg, var(--accent-warm), var(--accent));
+      }
+      .cat-data .skill-cat-icon {
+        background: rgba(201, 168, 76, 0.08);
+        color: var(--accent-warm);
+        border: 1px solid rgba(201, 168, 76, 0.15);
+      }
+      .cat-data .skill-pill:hover {
+        border-color: var(--accent-warm);
+        color: var(--accent-warm);
+      }
+      .cat-data .skill-pill::before {
+        background: var(--accent-warm);
+      }
+      .cat-data .skill-pill.core {
+        background: rgba(201, 168, 76, 0.06);
+        border-color: rgba(201, 168, 76, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ─── CAREER LADDER ─── */
+      .ladder {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: relative;
+      }
+
+      /* Vertical line via pseudo-element (no extra div needed) */
+      .ladder::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--cyan), var(--green));
+        transform: translateX(-50%);
+        opacity: 0.15;
+        z-index: 0;
+      }
+
+      .ladder-rung {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 56px 1fr;
+        align-items: center;
+        gap: 2rem;
+        padding: 2rem 0;
+      }
+
+      .ladder-rung:nth-child(odd) .ladder-content {
+        grid-column: 1;
+        text-align: right;
+      }
+      .ladder-rung:nth-child(even) .ladder-content {
+        grid-column: 3;
+        text-align: left;
+      }
+
+      .ladder-node {
+        grid-column: 2;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-d);
+        font-size: 1.4rem;
+        font-weight: 800;
+        border: 2px solid var(--cyan);
+        background: var(--void);
+        color: var(--accent-warm);
+        transition: all 0.3s;
+        position: relative;
+      }
+      .ladder-rung:hover .ladder-node {
+        background: var(--cyan);
+        color: var(--void);
+        box-shadow: 0 0 15px rgba(91, 156, 245, 0.2);
+      }
+      .ladder-rung:nth-child(even) .ladder-node {
+        border-color: var(--green);
+        color: var(--green);
+      }
+      .ladder-rung:nth-child(even):hover .ladder-node {
+        background: var(--green);
+        color: var(--void);
+        box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+      }
+
+      .ladder-content {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.8rem 2rem;
+        transition: all 0.3s;
+      }
+      .ladder-rung:hover .ladder-content {
+        border-color: rgba(201, 168, 76, 0.3);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+      }
+
+      .ladder-role {
+        font-family: var(--font-d);
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--text-bright);
+        margin-bottom: 0.2rem;
+      }
+      .ladder-company {
+        font-family: var(--font-m);
+        font-size: 0.72rem;
+        color: var(--accent-warm);
+        margin-bottom: 0.4rem;
+      }
+      .ladder-period {
+        font-family: var(--font-m);
+        font-size: 0.65rem;
+        color: var(--muted);
+        margin-bottom: 0.8rem;
+      }
+      .ladder-bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .ladder-bullets li {
+        font-size: 0.85rem;
+        color: var(--muted);
+        padding-left: 1.2rem;
+        position: relative;
+      }
+      .ladder-bullets li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent-warm);
+        font-size: 0.75rem;
+      }
+      .ladder-bullets li strong {
+        color: var(--text);
+      }
+
+      /* ─── PROJECTS — STAGGERED GRID ─── */
+      .projects-masonry {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      .proj-masonry-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .proj-masonry-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-6px) scale(1.01);
+        box-shadow:
+          0 25px 60px rgba(0, 0, 0, 0.5),
+          0 0 30px rgba(91, 156, 245, 0.06);
+      }
+      .proj-masonry-card.featured {
+        grid-column: 1/-1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .proj-masonry-card.featured .proj-m-visual {
+        min-height: 280px;
+        border-right: 1px solid var(--border);
+      }
+
+      .proj-m-visual {
+        position: relative;
+        overflow: hidden;
+        min-height: 180px;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+      }
+      .proj-m-visual-bg {
+        position: absolute;
+        inset: 0;
+        opacity: 0.12;
+        transition:
+          opacity 0.3s,
+          transform 0.6s;
+      }
+      .proj-masonry-card:hover .proj-m-visual-bg {
+        opacity: 0.18;
+        transform: scale(1.05);
+      }
+
+      .proj-m-badge {
+        position: absolute;
+        top: 1.2rem;
+        left: 1.2rem;
+        font-family: var(--font-m);
+        font-size: 0.6rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 3px;
+        z-index: 2;
+        letter-spacing: 0.05em;
+      }
+      .badge-ongoing {
+        background: rgba(201, 168, 76, 0.1);
+        color: var(--accent-warm);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+      }
+      .badge-live {
+        background: rgba(0, 255, 136, 0.1);
+        color: var(--green);
+        border: 1px solid rgba(0, 255, 136, 0.2);
+      }
+
+      .proj-m-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        position: relative;
+        z-index: 2;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .proj-m-body {
+        padding: 1.8rem 2rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .proj-m-body h3 {
+        font-family: var(--font-d);
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--text-bright);
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+      }
+      .proj-m-desc {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.7;
+        flex: 1;
+        margin-bottom: 1rem;
+      }
+      .proj-m-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+      }
+      .proj-m-tag {
+        font-family: var(--font-m);
+        font-size: 0.6rem;
+        padding: 0.2rem 0.55rem;
+        border-radius: 3px;
+        background: var(--panel);
+        color: var(--muted);
+        border: 1px solid var(--border2);
+      }
+      .proj-m-link {
+        font-family: var(--font-m);
+        font-size: 0.7rem;
+        color: var(--accent);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: gap 0.2s;
+      }
+      .proj-m-link:hover {
+        gap: 0.7rem;
+      }
+
+      /* Project visual gradients */
+      .pv1 {
+        background: linear-gradient(135deg, #001a2d, #003355, #0066aa);
+      }
+      .pv2 {
+        background: linear-gradient(135deg, #0d2500, #1a4d00, #339900);
+      }
+      .pv3 {
+        background: linear-gradient(135deg, #2d0a00, #5c1500, #aa3300);
+      }
+      .pv4 {
+        background: linear-gradient(135deg, #1a0033, #3d0066, #6600aa);
+      }
+      .pv5 {
+        background: linear-gradient(135deg, #001a2d, #002b4a, #004d7a);
+      }
+
+      /* ─── 3D IMMERSIVE ─── */
+      .perspective-wrap {
+        perspective: 1800px;
+        perspective-origin: 50% 40%;
+      }
+      .depth-layer {
+        transform-style: preserve-3d;
+        will-change: transform;
+      }
+
+      /* 3D card tilt */
+      .card-3d {
+        transform-style: preserve-3d;
+        transition:
+          transform 0.15s ease-out,
+          box-shadow 0.3s ease;
+        will-change: transform;
+      }
+      .card-3d .card-inner {
+        transform: translateZ(0);
+        transition: transform 0.3s ease;
+      }
+      .card-3d:hover .card-inner {
+        transform: translateZ(30px);
+      }
+      .card-3d .card-shine {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background: radial-gradient(
+          circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(91, 156, 245, 0.12) 0%,
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: 2;
+      }
+      .card-3d:hover .card-shine {
+        opacity: 1;
+      }
+
+      /* depth particles removed — space scene handles atmosphere */
+
+      /* Section depth stagger */
+      .section-depth-1 {
+        transform: translateZ(0px);
+      }
+      .section-depth-2 {
+        transform: translateZ(-50px) scale(1.02);
+      }
+      .section-depth-3 {
+        transform: translateZ(-100px) scale(1.04);
+      }
+
+      /* hero glow ring removed — space background provides atmosphere */
+
+      /* overlays removed for clean space aesthetic */
+
+      /* Magnetic button base */
+      .btn-magnetic {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      /* Enhanced card hover shadows */
+      .proj-card.tilted {
+        box-shadow:
+          0 25px 60px rgba(0, 0, 0, 0.7),
+          0 0 40px rgba(91, 156, 245, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+      .skill-card.tilted {
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.6),
+          0 0 30px rgba(91, 156, 245, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+
+      /* cursor glow removed */
+
+      /* ─── MAIN TOGGLE ─── */
+      #main-site {
+        display: block;
+      }
+
+      /* ═══════════════════════════════════════════
+   COMPREHENSIVE RESPONSIVE
+═══════════════════════════════════════════ */
+      @media (max-width: 960px) {
+        #cursor-dot,
+        #cursor-ring,
+        #cursor-glow {
+          display: none;
+        }
+        .nav-hamburger {
+          display: block;
+        }
+        .nav-cta {
+          display: none;
+        }
+        .mobile-menu {
+          display: flex;
+        }
+        #home,
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        #home {
+          min-height: auto;
+          padding: 100px clamp(1.5rem, 5vw, 4rem) 60px;
+        }
+        .hero-terminal {
+          display: none;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hero-stats {
+          flex-wrap: wrap;
+          gap: 1.5rem;
+        }
+        .bento-grid {
+          grid-template-columns: 1fr;
+        }
+        .bento-cell.span-2 {
+          grid-column: span 1;
+        }
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+        .ladder-rung {
+          grid-template-columns: 56px 1fr;
+          gap: 1rem;
+        }
+        .ladder::before {
+          display: none;
+        }
+        .ladder-rung:nth-child(odd) .ladder-content,
+        .ladder-rung:nth-child(even) .ladder-content {
+          grid-column: 2;
+          text-align: left;
+        }
+        .ladder-node {
+          grid-column: 1;
+        }
+        .projects-masonry {
+          grid-template-columns: 1fr;
+        }
+        .proj-masonry-card.featured {
+          grid-template-columns: 1fr;
+        }
+        .proj-masonry-card.featured .proj-m-visual {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .articles-grid {
+          grid-template-columns: 1fr;
+        }
+        .hl-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hl-item:nth-child(odd) {
+          border-right: 1px solid var(--border2);
+        }
+        .hl-item:nth-child(4) {
+          border-bottom: none;
+        }
+        footer {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+      @media (max-width: 600px) {
+        section {
+          padding: 60px clamp(1rem, 5vw, 2rem);
+        }
+        .hero-badge {
+          font-size: 0.7rem;
+          padding: 0.8rem 0.7rem;
+          gap: 0.2rem;
+        }
+        h1.hero-title {
+          font-size: clamp(3.6rem, 16vw, 5rem);
+        }
+        .hero-role {
+          font-size: 0.7rem;
+        }
+        .hero-desc {
+          font-size: 1.05rem;
+        }
+        .hero-stats {
+          gap: 2rem;
+        }
+        .stat-n {
+          font-size: 1.6rem;
+        }
+        .btn-primary,
+        .btn-outline {
+          padding: 0.75rem 1.5rem;
+          font-size: 0.72rem;
+        }
+        .bento-cell {
+          padding: 1.4rem;
+        }
+        .bento-title {
+          font-size: 1.15rem;
+        }
+        .bento-facts {
+          grid-template-columns: 1fr;
+        }
+        .hl-grid {
+          grid-template-columns: 1fr;
+        }
+        .hl-item {
+          border-right: none !important;
+          border-bottom: 1px solid var(--border2);
+          padding: 1rem 0;
+        }
+        .hl-item:last-child {
+          border-bottom: none;
+        }
+        .skill-cat-header {
+          flex-wrap: wrap;
+        }
+        .contact-links {
+          gap: 0.8rem;
+        }
+        .c-link {
+          padding: 1rem 1.4rem;
+          gap: 1rem;
+        }
+        .c-link-icon {
+          width: 38px;
+          height: 38px;
+        }
+        footer {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .ach-grid {
+          grid-template-columns: 1fr;
+        }
+        .sec-title {
+          font-size: clamp(1.5rem, 5vw, 2.2rem);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Custom cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    <div id="cursor-glow"></div>
+
+    <!-- Animated particle background -->
+    <div id="particle-bg"></div>
+
+    <!-- 3D geometry canvas -->
+    <canvas
+      id="hero-3d"
+      style="
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      "
+    ></canvas>
+
+    <!-- Background -->
+
+    <!-- ═══ NAV ═══ -->
+    <nav id="navbar">
+      <a href="#home" class="nav-logo" onclick="showMain()">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="flex-shrink: 0"
+        >
+          <polyline points="16 18 22 12 16 6" />
+          <polyline points="8 6 2 12 8 18" />
+        </svg>
+        Rudra Gupta
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about-me">about</a></li>
+        <li><a href="#journey">journey</a></li>
+        <li><a href="#skills">skills</a></li>
+        <li><a href="#experience">career</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#articles">articles</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+      <a
+        href="https://linkedin.com/in/rudra-gupta"
+        target="_blank"
+        class="nav-cta"
+        ><svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="flex-shrink: 0"
+        >
+          <path
+            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+          />
+          <rect x="2" y="9" width="4" height="12" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
+        LinkedIn</a
+      >
+      <button
+        class="nav-hamburger"
+        onclick="toggleMobileMenu()"
+        aria-label="Menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about-me" onclick="closeMobileMenu()">About</a>
+      <a href="#journey" onclick="closeMobileMenu()">Journey</a>
+      <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+      <a href="#experience" onclick="closeMobileMenu()">Career</a>
+      <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+      <a href="#articles" onclick="closeMobileMenu()">Articles</a>
+      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </div>
+
+    <!-- ════════════════════════════════════════
+     MAIN SITE
+════════════════════════════════════════ -->
+    <div id="main-site" class="perspective-wrap">
+      <!-- HERO -->
+      <section id="home">
+        <div>
+          <div class="hero-badge">
+            <div class="badge-dot"></div>
+            <span>Technical Head</span>
+            · UPES-CSA · Open to Internships
+          </div>
+
+          <!-- H1 — Primary keyword -->
+          <h1 class="hero-title">
+            Rudra<br />
+            <span class="hero-title-glow">Gupta</span>
+          </h1>
+
+          <div class="hero-role">
+            // AI/ML Developer &amp; Full-Stack Engineer
+          </div>
+
+          <p class="hero-desc">
+            B.Tech CS (AI/ML) student at
+            <strong>UPES, Dehradun</strong> building
+            <strong>LLMs, RAG pipelines, and scalable web systems</strong>.
+            Currently leading tech at UPES-CSA. I turn research into real
+            products.
+          </p>
+
+          <div class="hero-btns">
+            <a href="#projects" class="btn-primary">View Projects</a>
+            <a href="#contact" class="btn-outline">Hire Me</a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <div class="stat-n" data-count="5">0</div>
+              <div class="stat-l">Projects Built</div>
+            </div>
+            <div>
+              <div class="stat-n" data-count="10">0</div>
+              <div class="stat-l">Members Mentored</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal card -->
+        <div class="hero-terminal">
+          <div class="terminal-bar">
+            <div class="t-dot r"></div>
+            <div class="t-dot y"></div>
+            <div class="t-dot g"></div>
+            <span class="terminal-title">rudra@upes ~ portfolio</span>
+          </div>
+          <div class="terminal-body" id="terminal">
+            <div class="t-line">
+              <span class="t-prompt">❯</span><span class="t-cmd">whoami</span>
+            </div>
+            <div class="t-line">
+              <span class="t-val">Rudra Gupta</span>
+              <span class="t-comment">// AI/ML Developer</span>
+            </div>
+            <div class="t-line" style="margin-top: 0.5rem">
+              <span class="t-prompt">❯</span
+              ><span class="t-cmd">cat skills.txt</span>
+            </div>
+            <div class="t-line">
+              <span class="t-val">Python · PyTorch · LoRA · RAG · FAISS</span>
+            </div>
+            <div class="t-line">
+              <span class="t-val">React.js · Node.js · Docker · AWS</span>
+            </div>
+            <div class="t-line" style="margin-top: 0.5rem">
+              <span class="t-prompt">❯</span
+              ><span class="t-cmd">cat current_focus.txt</span>
+            </div>
+            <div class="t-line">
+              <span class="t-val">Edu-SLM</span>
+              <span class="t-comment">// LLaMA 3.1 + LoRA fine-tuning</span>
+            </div>
+            <div class="t-line" style="margin-top: 0.5rem">
+              <span class="t-prompt">❯</span
+              ><span class="t-cmd">echo $status</span>
+            </div>
+            <div class="t-line">
+              <span class="t-val">Available for internships</span>
+              <span class="t-cursor"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT ME — BENTO GRID -->
+      <section id="about-me">
+        <div class="sec-tag">01 — about me</div>
+        <h2 class="sec-title">Who I Am</h2>
+        <p class="sec-sub">
+          Builder, mentor, and club leader. I ship AI systems that actually
+          work.
+        </p>
+
+        <div class="bento-grid">
+          <!-- Bio — spans 2 cols -->
+          <div class="bento-cell span-2 bio-card reveal">
+            <div class="bento-label">Background</div>
+            <div class="bento-title">
+              Fine-tuning models, shipping code, leading teams.
+            </div>
+            <p class="bento-text">
+              B.Tech CS (AI/ML) at UPES, Dehradun. I spend my time between
+              PyTorch notebooks and production deploys, with a
+              <strong>focus on LLM fine-tuning and RAG systems</strong>.
+            </p>
+            <p class="bento-text" style="margin-top: 0.6rem">
+              As <strong>Technical Head at UPES-CSA</strong>, I run the dev team
+              behind
+              <a
+                href="https://upescsa.in"
+                target="_blank"
+                style="color: var(--accent-warm); text-decoration: none"
+                >upescsa.in</a
+              >, mentor 10+ members, and organize Hackathon 4.0 and AWS
+              Community Day Dehradun 2025.
+            </p>
+          </div>
+
+          <!-- Quick stats — vertical -->
+          <div class="bento-cell reveal">
+            <div class="bento-label">By The Numbers</div>
+            <div class="bento-facts">
+              <div class="bento-fact">
+                <div class="bento-fact-val" style="color: var(--accent)">
+                  5+
+                </div>
+                <div class="bento-fact-label">Projects Shipped</div>
+              </div>
+              <div class="bento-fact">
+                <div class="bento-fact-val" style="color: var(--accent-warm)">
+                  10+
+                </div>
+                <div class="bento-fact-label">Members Mentored</div>
+              </div>
+              <div class="bento-fact">
+                <div class="bento-fact-val" style="color: var(--accent)">4</div>
+                <div class="bento-fact-label">Events Organized</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="bento-cell reveal">
+            <div class="bento-label">Education</div>
+            <div class="bento-title" style="font-size: 1.1rem">
+              UPES, Dehradun
+            </div>
+            <p class="bento-text">
+              B.Tech Computer Science &amp; Engineering with specialization in
+              Artificial Intelligence &amp; Machine Learning.
+            </p>
+            <div class="bento-tags" style="margin-top: 1rem">
+              <span class="bento-tag">2023 — 2027</span>
+              <span class="bento-tag">AI/ML Specialization</span>
+              <span class="bento-tag">Dehradun, India</span>
+            </div>
+          </div>
+
+          <!-- Current Focus -->
+          <div class="bento-cell reveal">
+            <div class="bento-label">Current Focus</div>
+            <div class="bento-title" style="font-size: 1.1rem">Edu-SLM</div>
+            <p class="bento-text">
+              Curriculum-aligned language model using LoRA fine-tuning on LLaMA
+              3.1 8B with RAG-based retrieval grounding.
+            </p>
+            <div class="bento-tags" style="margin-top: 1rem">
+              <span class="bento-tag">LLaMA 3.1</span>
+              <span class="bento-tag">LoRA</span>
+              <span class="bento-tag">RAG</span>
+              <span class="bento-tag">FAISS</span>
+            </div>
+          </div>
+
+          <!-- Highlights — spans full -->
+          <div class="bento-cell span-full reveal">
+            <div class="bento-label">Resume Highlights</div>
+            <div class="hl-grid">
+              <div class="hl-item">
+                <div class="hl-num" style="color: var(--accent)">01</div>
+                <div class="hl-text">
+                  Top 5 finalist — SIH Internal Hackathon 2025
+                </div>
+              </div>
+              <div class="hl-item">
+                <div class="hl-num" style="color: var(--accent-warm)">02</div>
+                <div class="hl-text">
+                  Led AWS Community Day Dehradun 2025 end-to-end
+                </div>
+              </div>
+              <div class="hl-item">
+                <div class="hl-num" style="color: var(--accent)">03</div>
+                <div class="hl-text">
+                  Deployed production MERN app on AWS with Docker + Nginx
+                </div>
+              </div>
+              <div class="hl-item">
+                <div class="hl-num" style="color: var(--accent-warm)">04</div>
+                <div class="hl-text">
+                  Published semantic QA system over Bhagavad Gita using Llama 3
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY JOURNEY — ALTERNATING TIMELINE -->
+      <section id="journey">
+        <div class="sec-tag">02 — my journey</div>
+        <h2 class="sec-title">The Climb</h2>
+        <p class="sec-sub">
+          From curious freshman to technical head — every step shaped how I
+          build and lead.
+        </p>
+
+        <div class="timeline-wrap">
+          <!-- 1: Left -->
+          <div class="tl-node">
+            <div class="tl-card">
+              <div class="tl-year">2023</div>
+              <div class="tl-title">The Beginning</div>
+              <div class="tl-sub">B.Tech CS (AI/ML) · UPES, Dehradun</div>
+              <div class="tl-desc">
+                Started my journey into computer science with a focus on AI/ML.
+                Discovered a passion for building intelligent systems that solve
+                real problems.
+              </div>
+            </div>
+            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+            <div class="tl-empty"></div>
+          </div>
+
+          <!-- 2: Right -->
+          <div class="tl-node">
+            <div class="tl-empty"></div>
+            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+            <div class="tl-card">
+              <div class="tl-year">Jun — Jul 2024</div>
+              <div class="tl-title">First Impact</div>
+              <div class="tl-sub">S.O.S. International (Srijan) · Jammu</div>
+              <div class="tl-desc">
+                Worked with underprivileged communities, learning the value of
+                technology as a force for social good.
+              </div>
+            </div>
+          </div>
+
+          <!-- 3: Left -->
+          <div class="tl-node">
+            <div class="tl-card">
+              <div class="tl-year">Jun 2024</div>
+              <div class="tl-title">Stepping Up</div>
+              <div class="tl-sub">Associate Technical Head · UPES-CSA</div>
+              <div class="tl-desc">
+                Took on leadership — mentoring 10+ members, contributing to the
+                UPES-CSA platform, and supporting hackathons and workshops.
+              </div>
+            </div>
+            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+            <div class="tl-empty"></div>
+          </div>
+
+          <!-- 4: Right -->
+          <div class="tl-node">
+            <div class="tl-empty"></div>
+            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+            <div class="tl-card">
+              <div class="tl-year">Jun — Jul 2025</div>
+              <div class="tl-title">Industry Exposure</div>
+              <div class="tl-sub">Web Developer Intern · Pi Craft · Remote</div>
+              <div class="tl-desc">
+                Built production-grade React.js components, optimized UI
+                performance, and learned to ship code that real users depend on.
+              </div>
+            </div>
+          </div>
+
+          <!-- 5: Left -->
+          <div class="tl-node">
+            <div class="tl-card">
+              <div class="tl-year">Apr 2025</div>
+              <div class="tl-title">Leading The Charge</div>
+              <div class="tl-sub">Technical Head · UPES-CSA</div>
+              <div class="tl-desc">
+                Leading development of upescsa.in, organizing Hackathon 4.0, AWS
+                Community Day Dehradun 2025, and mentoring the next generation.
+              </div>
+            </div>
+            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+            <div class="tl-empty"></div>
+          </div>
+
+          <!-- 6: Right -->
+          <div class="tl-node">
+            <div class="tl-empty"></div>
+            <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
+            <div class="tl-card">
+              <div class="tl-year">2025 — Present</div>
+              <div class="tl-title">Building The Future</div>
+              <div class="tl-sub">Edu-SLM · Research · LLM Fine-Tuning</div>
+              <div class="tl-desc">
+                My biggest project — a curriculum-aligned language model
+                combining LoRA fine-tuning with RAG retrieval. Turning research
+                into a product.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS — CATEGORY CARDS WITH PILLS -->
+      <section id="skills">
+        <div class="sec-tag">03 — technical skills</div>
+        <h2 class="sec-title">Skills &amp; Stack</h2>
+        <p class="sec-sub">
+          From LLM fine-tuning pipelines to production deployments —
+          full-spectrum AI/ML engineering.
+        </p>
+
+        <div class="skills-grid">
+          <!-- Languages -->
+          <div class="skill-category cat-lang reveal">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">&#123;&#125;</div>
+              <div class="skill-cat-name">Languages</div>
+              <div class="skill-cat-count">5</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill core" style="--prof: 95%">Python</span>
+              <span class="skill-pill core" style="--prof: 88%"
+                >JavaScript</span
+              >
+              <span class="skill-pill solid" style="--prof: 72%"
+                >TypeScript</span
+              >
+              <span class="skill-pill solid" style="--prof: 65%">Java</span>
+              <span class="skill-pill solid" style="--prof: 60%">C / C++</span>
+            </div>
+          </div>
+
+          <!-- AI / ML / LLM -->
+          <div class="skill-category cat-ai reveal">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">AI</div>
+              <div class="skill-cat-name">AI / ML / LLM</div>
+              <div class="skill-cat-count">10</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill core" style="--prof: 90%">PyTorch</span>
+              <span class="skill-pill core" style="--prof: 88%"
+                >LoRA Fine-Tuning</span
+              >
+              <span class="skill-pill core" style="--prof: 85%">RAG</span>
+              <span class="skill-pill core" style="--prof: 82%">FAISS</span>
+              <span class="skill-pill solid" style="--prof: 80%"
+                >Hugging Face</span
+              >
+              <span class="skill-pill solid" style="--prof: 78%"
+                >Computer Vision</span
+              >
+              <span class="skill-pill solid" style="--prof: 76%">NLP</span>
+              <span class="skill-pill solid" style="--prof: 75%"
+                >TensorFlow</span
+              >
+              <span class="skill-pill solid" style="--prof: 72%"
+                >Scikit-learn</span
+              >
+              <span class="skill-pill solid" style="--prof: 70%">YOLO</span>
+            </div>
+          </div>
+
+          <!-- Web Development -->
+          <div class="skill-category cat-web reveal">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">W</div>
+              <div class="skill-cat-name">Web Development</div>
+              <div class="skill-cat-count">8</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill core" style="--prof: 90%">React.js</span>
+              <span class="skill-pill core" style="--prof: 85%"
+                >Tailwind CSS</span
+              >
+              <span class="skill-pill solid" style="--prof: 82%">Node.js</span>
+              <span class="skill-pill solid" style="--prof: 80%"
+                >REST APIs</span
+              >
+              <span class="skill-pill solid" style="--prof: 78%"
+                >Express.js</span
+              >
+              <span class="skill-pill solid" style="--prof: 75%">FastAPI</span>
+              <span class="skill-pill solid" style="--prof: 72%"
+                >Streamlit</span
+              >
+              <span class="skill-pill solid" style="--prof: 70%">Next.js</span>
+            </div>
+          </div>
+
+          <!-- Data & Cloud -->
+          <div class="skill-category cat-data reveal">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon">D</div>
+              <div class="skill-cat-name">Data &amp; Cloud</div>
+              <div class="skill-cat-count">8</div>
+            </div>
+            <div class="skill-pills">
+              <span class="skill-pill core" style="--prof: 90%"
+                >Git / GitHub</span
+              >
+              <span class="skill-pill core" style="--prof: 88%">MongoDB</span>
+              <span class="skill-pill core" style="--prof: 85%">Docker</span>
+              <span class="skill-pill solid" style="--prof: 80%">AWS</span>
+              <span class="skill-pill solid" style="--prof: 72%">MySQL</span>
+              <span class="skill-pill solid" style="--prof: 70%"
+                >PostgreSQL</span
+              >
+              <span class="skill-pill solid" style="--prof: 68%">Nginx</span>
+              <span class="skill-pill solid" style="--prof: 60%">Redis</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE — CAREER LADDER -->
+      <section id="experience">
+        <div class="sec-tag">04 — work &amp; leadership</div>
+        <h2 class="sec-title">The Ladder</h2>
+        <p class="sec-sub">
+          Each rung represents a leap — from intern to leader, from learning to
+          building.
+        </p>
+
+        <div class="ladder">
+          <div class="ladder-rung reveal">
+            <div class="ladder-content">
+              <div class="ladder-role">Web Developer Intern</div>
+              <div class="ladder-company">Pi Craft · Remote</div>
+              <div class="ladder-period">Jun — Jul 2025</div>
+              <ul class="ladder-bullets">
+                <li>
+                  Built <strong>responsive React.js components</strong> for
+                  production web apps
+                </li>
+                <li>
+                  Optimized UI performance across multiple application modules
+                </li>
+              </ul>
+            </div>
+            <div class="ladder-node">1</div>
+          </div>
+
+          <div class="ladder-rung reveal">
+            <div class="ladder-node">2</div>
+            <div class="ladder-content">
+              <div class="ladder-role">Associate Technical Head</div>
+              <div class="ladder-company">UPES-CSA</div>
+              <div class="ladder-period">Jun 2024 — Apr 2025</div>
+              <ul class="ladder-bullets">
+                <li>
+                  Mentored <strong>10+ members</strong> in development practices
+                </li>
+                <li>Contributed to the UPES-CSA platform build</li>
+                <li>Supported hackathons, workshops, and competitions</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ladder-rung reveal">
+            <div class="ladder-content">
+              <div class="ladder-role">Technical Head</div>
+              <div class="ladder-company">UPES-CSA</div>
+              <div class="ladder-period">Apr 2025 — Present</div>
+              <ul class="ladder-bullets">
+                <li>
+                  Led development of <strong>upescsa.in</strong> with AWS
+                  deployment
+                </li>
+                <li>
+                  Organized
+                  <strong>Hackathon 4.0, AWS Community Day 2025</strong>
+                </li>
+                <li>Leading cross-functional dev and event operations</li>
+              </ul>
+            </div>
+            <div class="ladder-node">3</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS — STAGGERED MASONRY -->
+      <section id="projects">
+        <div class="sec-tag">05 — projects</div>
+        <h2 class="sec-title">Featured Projects</h2>
+        <p class="sec-sub">
+          End-to-end AI systems, NLP applications, and full-stack platforms
+          shipped to production.
+        </p>
+
+        <div class="projects-masonry">
+          <!-- FEATURED — spans full width -->
+          <div class="proj-masonry-card featured reveal">
+            <div class="proj-m-visual">
+              <div class="proj-m-visual-bg pv1"></div>
+              <span class="proj-m-badge badge-ongoing">Ongoing</span>
+              <div
+                class="proj-m-icon"
+                style="
+                  background: rgba(0, 30, 60, 0.6);
+                  color: var(--accent-warm);
+                "
+              >
+                AI
+              </div>
+            </div>
+            <div class="proj-m-body">
+              <h3>Edu-SLM — Domain-Specific Educational LLM</h3>
+              <p class="proj-m-desc">
+                Curriculum-aligned LLM for academic Q&amp;A. Uses LoRA
+                fine-tuning, retrieval-based grounding (RAG), and black-box
+                distillation to improve response reliability over standard
+                models.
+              </p>
+              <div class="proj-m-stack">
+                <span class="proj-m-tag">LLaMA 3.1 8B</span
+                ><span class="proj-m-tag">LoRA</span>
+                <span class="proj-m-tag">RAG</span
+                ><span class="proj-m-tag">FAISS</span
+                ><span class="proj-m-tag">Python</span>
+              </div>
+              <a href="#contact" class="proj-m-link">View on GitHub →</a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="proj-masonry-card reveal">
+            <div class="proj-m-visual">
+              <div class="proj-m-visual-bg pv2"></div>
+              <span class="proj-m-badge badge-live">Live</span>
+              <div
+                class="proj-m-icon"
+                style="background: rgba(20, 60, 0, 0.6); color: var(--green)"
+              >
+                W3
+              </div>
+            </div>
+            <div class="proj-m-body">
+              <h3>UPESCSA.in — Official Club Website</h3>
+              <p class="proj-m-desc">
+                Official website for UPES-CSA enabling event registrations and
+                dynamic content. Deployed on AWS using Docker and Nginx.
+              </p>
+              <div class="proj-m-stack">
+                <span class="proj-m-tag">MERN Stack</span
+                ><span class="proj-m-tag">Docker</span>
+                <span class="proj-m-tag">Nginx</span
+                ><span class="proj-m-tag">AWS</span>
+              </div>
+              <a href="https://upescsa.in" target="_blank" class="proj-m-link"
+                >Visit upescsa.in →</a
+              >
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="proj-masonry-card reveal">
+            <div class="proj-m-visual">
+              <div class="proj-m-visual-bg pv3"></div>
+              <span class="proj-m-badge badge-live">Live</span>
+              <div
+                class="proj-m-icon"
+                style="background: rgba(60, 20, 0, 0.6); color: var(--orange)"
+              >
+                Gt
+              </div>
+            </div>
+            <div class="proj-m-body">
+              <h3>TheGeetaWay — AI Bhagavad Gita Portal</h3>
+              <p class="proj-m-desc">
+                Semantic search and Q&amp;A over the Bhagavad Gita using
+                vector-based retrieval with Llama 3.
+              </p>
+              <div class="proj-m-stack">
+                <span class="proj-m-tag">Llama 3</span
+                ><span class="proj-m-tag">FAISS</span>
+                <span class="proj-m-tag">FastAPI</span
+                ><span class="proj-m-tag">Streamlit</span>
+              </div>
+              <a
+                href="https://thegeetaway.streamlit.app"
+                target="_blank"
+                class="proj-m-link"
+                >Visit Live App →</a
+              >
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="proj-masonry-card reveal">
+            <div class="proj-m-visual">
+              <div class="proj-m-visual-bg pv4"></div>
+              <span class="proj-m-badge badge-live">Live</span>
+              <div
+                class="proj-m-icon"
+                style="background: rgba(40, 0, 60, 0.6); color: #c878ff"
+              >
+                ASL
+              </div>
+            </div>
+            <div class="proj-m-body">
+              <h3>ASL Recognition — Real-Time Sign Language</h3>
+              <p class="proj-m-desc">
+                Real-time ASL recognition using YOLO alphabet detection and
+                MediaPipe hand tracking. 0.99+ precision.
+              </p>
+              <div class="proj-m-stack">
+                <span class="proj-m-tag">YOLO</span
+                ><span class="proj-m-tag">MediaPipe</span>
+                <span class="proj-m-tag">OpenCV</span
+                ><span class="proj-m-tag">Python</span>
+              </div>
+              <a href="#contact" class="proj-m-link">View on GitHub →</a>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="proj-masonry-card reveal">
+            <div class="proj-m-visual">
+              <div class="proj-m-visual-bg pv5"></div>
+              <span class="proj-m-badge badge-live">Live</span>
+              <div
+                class="proj-m-icon"
+                style="
+                  background: rgba(0, 30, 60, 0.6);
+                  color: var(--accent-warm);
+                "
+              >
+                ML
+              </div>
+            </div>
+            <div class="proj-m-body">
+              <h3>TempPrediction — Weather Forecasting ML</h3>
+              <p class="proj-m-desc">
+                Temperature prediction model using Random Forest regression. R²
+                score of 0.94 for short-term forecasting.
+              </p>
+              <div class="proj-m-stack">
+                <span class="proj-m-tag">Random Forest</span
+                ><span class="proj-m-tag">Scikit-learn</span>
+                <span class="proj-m-tag">Pandas</span
+                ><span class="proj-m-tag">Streamlit</span>
+              </div>
+              <a href="#contact" class="proj-m-link">View on GitHub →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACHIEVEMENTS -->
+      <section id="achievements">
+        <div class="sec-tag">06 — achievements</div>
+        <h2 class="sec-title">Recognition &amp; Events</h2>
+        <p class="sec-sub">
+          Competitive wins and flagship events I've led from conception to
+          execution.
+        </p>
+
+        <div class="ach-grid">
+          <div class="ach-card reveal">
+            <div class="ach-icon">🏆</div>
+            <div>
+              <div class="ach-title">Top 5 — SIH Internal Hackathon 2025</div>
+              <div class="ach-desc">
+                Selected among top 5 teams at the Smart India Hackathon internal
+                round at UPES.
+              </div>
+            </div>
+          </div>
+          <div class="ach-card reveal">
+            <div class="ach-icon">☁️</div>
+            <div>
+              <div class="ach-title">AWS Community Day Dehradun 2025</div>
+              <div class="ach-desc">
+                Led end-to-end execution of this large-scale AWS community
+                conference as Technical Head.
+              </div>
+            </div>
+          </div>
+          <div class="ach-card reveal">
+            <div class="ach-icon">💻</div>
+            <div>
+              <div class="ach-title">Hackathon 4.0 — Lead Organizer</div>
+              <div class="ach-desc">
+                Organized and executed UPES-CSA's flagship Hackathon 4.0 from
+                logistics to judging.
+              </div>
+            </div>
+          </div>
+          <div class="ach-card reveal">
+            <div class="ach-icon">⚡</div>
+            <div>
+              <div class="ach-title">Azure Cloudscape &amp; Entropedia 2.0</div>
+              <div class="ach-desc">
+                Delivered two large-scale cloud and tech events, ensuring smooth
+                end-to-end operations.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ARTICLES -->
+      <section id="articles">
+        <div class="sec-tag">07 — writing</div>
+        <h2 class="sec-title">SEO Articles</h2>
+        <p class="sec-sub">
+          Deep-dive technical writing in my niche — LLM engineering and AI for
+          developers.
+        </p>
+
+        <div class="articles-grid">
+          <a
+            class="art-card reveal"
+            onclick="showArticle('a1')"
+            href="#a1"
+            style="cursor: pointer"
+          >
+            <div class="art-thumb thumb1">
+              <div class="art-thumb-icon">🔧</div>
+              <span class="art-cat">LLM Engineering</span>
+            </div>
+            <div class="art-meta">
+              <h3>
+                How to Fine-Tune LLMs with LoRA: A Practical Guide for AI/ML
+                Students (2025)
+              </h3>
+              <p>
+                Step-by-step breakdown of Low-Rank Adaptation — from theory to
+                training your first fine-tuned model on free GPU.
+              </p>
+              <div class="art-footer">
+                <span>10 min read · May 2025</span>
+                <span class="art-read">Read →</span>
+              </div>
+            </div>
+          </a>
+
+          <a
+            class="art-card reveal"
+            onclick="showArticle('a2')"
+            href="#a2"
+            style="cursor: pointer"
+          >
+            <div class="art-thumb thumb2">
+              <div class="art-thumb-icon">⚔️</div>
+              <span class="art-cat">AI Architecture</span>
+            </div>
+            <div class="art-meta">
+              <h3>
+                RAG vs Fine-Tuning: Which Should You Choose for Your AI
+                Application in 2025?
+              </h3>
+              <p>
+                A technical comparison of Retrieval-Augmented Generation and
+                fine-tuning — with decision criteria, cost analysis, and real
+                examples.
+              </p>
+              <div class="art-footer">
+                <span>12 min read · April 2025</span>
+                <span class="art-read">Read →</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="sec-tag">08 — contact</div>
+        <h2 class="sec-title">Get In Touch</h2>
+        <p class="sec-sub">
+          Open to AI/ML internships, full-stack roles, research collaborations,
+          and open-source contributions.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-text reveal">
+            <p>
+              Whether you're a recruiter looking for an AI developer, a
+              researcher wanting to collaborate on LLM projects, or someone who
+              wants to chat about building intelligent systems — reach out.
+            </p>
+            <div class="contact-links">
+              <a href="mailto:rudragupta0123@gmail.com" class="c-link c-link-email">
+                <div class="c-link-icon" style="color:#e8915a">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="c-link-label">Email</div>
+                  <div class="c-link-val">rudragupta0123@gmail.com</div>
+                </div>
+              </a>
+              <a
+                href="https://linkedin.com/in/rudra-gupta"
+                target="_blank"
+                class="c-link c-link-linkedin"
+              >
+                <div class="c-link-icon" style="color: #0a66c2">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+                    />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="c-link-label">LinkedIn</div>
+                  <div class="c-link-val">linkedin.com/in/rudra-gupta</div>
+                </div>
+              </a>
+              <a
+                href="https://github.com/BlackJack-14"
+                target="_blank"
+                class="c-link c-link-github"
+              >
+                <div class="c-link-icon" style="color:#f0eeeb">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                    />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="c-link-label">GitHub</div>
+                  <div class="c-link-val">github.com/BlackJack-14</div>
+                </div>
+              </a>
+              <a href="tel:+918800906062" class="c-link c-link-phone">
+                <div class="c-link-icon" style="color: #00ff41">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div class="c-link-label">Phone</div>
+                  <div class="c-link-val">+91 88009 06062</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="foot-copy">
+          © 2025 Rudra Gupta · AI/ML Developer · UPES Dehradun
+        </div>
+        <div class="foot-links">
+          <a href="#home" onclick="showMain()">Home</a>
+          <a href="#about-me">About</a>
+          <a href="#journey">Journey</a>
+          <a href="#projects">Projects</a>
+          <a href="#articles">Articles</a>
+          <a href="https://github.com/BlackJack-14" target="_blank">GitHub ↗</a>
+          <a href="https://linkedin.com/in/rudra-gupta" target="_blank"
+            >LinkedIn ↗</a
+          >
+        </div>
+      </footer>
+    </div>
+    <!-- end main-site -->
+
+    <!-- ════════════════════════════════════════
+     ARTICLE 1
+     Slug: /how-to-fine-tune-llm-lora-guide
+     Primary keyword: LLM fine-tuning with LoRA
+     Intent: Informational
+════════════════════════════════════════ -->
+    <div id="a1" class="article-page">
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "How to Fine-Tune LLMs with LoRA: A Practical Guide for AI/ML Students (2025)",
+          "description": "A step-by-step guide to fine-tuning large language models using Low-Rank Adaptation (LoRA) — from theory to practice for AI students.",
+          "author": { "@type": "Person", "name": "Rudra Gupta" },
+          "datePublished": "2025-05-01",
+          "keywords": [
+            "LLM fine-tuning LoRA",
+            "LoRA fine-tuning tutorial",
+            "fine-tune LLaMA 2025",
+            "parameter efficient fine-tuning",
+            "PEFT AI students",
+            "how to fine-tune language model free GPU"
+          ]
+        }
+      </script>
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is LoRA fine-tuning for LLMs?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "LoRA (Low-Rank Adaptation) is a parameter-efficient fine-tuning technique that injects trainable low-rank matrices into a frozen pre-trained model. Instead of updating all model weights, LoRA only trains a small number of additional parameters, reducing GPU memory requirements by up to 10x while achieving comparable performance to full fine-tuning."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I fine-tune an LLM for free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Google Colab Pro or Kaggle Notebooks offer free T4/P100 GPUs sufficient for LoRA fine-tuning of 7B models in 4-bit quantization. Tools like Unsloth further reduce memory usage, making it possible to fine-tune LLaMA 3 8B on a single free GPU in under 2 hours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between LoRA and full fine-tuning?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Full fine-tuning updates all model parameters (billions of weights), requiring massive GPU memory and risking catastrophic forgetting. LoRA freezes the original weights and only trains small rank-decomposition matrices (< 1% of total parameters), making it 10-50x more memory-efficient while preserving the base model's capabilities."
+              }
+            }
+          ]
+        }
+      </script>
+
+      <div class="art-pg-header">
+        <div class="art-breadcrumb">
+          <a href="#home" onclick="showMain()">Home</a> →
+          <a
+            href="#articles"
+            onclick="
+              showMain();
+              setTimeout(
+                () => document.getElementById('articles').scrollIntoView(),
+                100,
+              );
+            "
+            >Articles</a
+          >
+          → LoRA Fine-Tuning Guide
+        </div>
+        <h1 class="art-pg-title">
+          How to Fine-Tune LLMs with LoRA: A Practical Guide for AI/ML Students
+          (2025)
+        </h1>
+        <div class="art-pg-info">
+          <span>✍️ Rudra Gupta</span>
+          <span>📅 May 1, 2025</span>
+          <span>⏱ 10 min read</span>
+          <span>🏷 LLM · LoRA · Fine-Tuning · PEFT</span>
+        </div>
+      </div>
+
+      <div class="art-pg-body-wrap">
+        <div class="art-pg-body">
+          <div class="snippet">
+            <div class="snippet-lbl">📌 Quick Answer — Featured Snippet</div>
+            <p>
+              <strong>LoRA (Low-Rank Adaptation) fine-tuning</strong> lets you
+              customize a pre-trained LLM on your own dataset using &lt; 1% of
+              original parameters. The process: (1) load a quantized base model
+              (LLaMA, Mistral, etc.), (2) inject LoRA adapter layers using PEFT,
+              (3) train on your dataset with a small learning rate, (4) merge
+              and export. Free GPU (Google Colab T4) is sufficient for 7B
+              models.
+            </p>
+          </div>
+
+          <h2>What is LoRA and Why Does It Matter?</h2>
+          <p>
+            Fine-tuning a large language model used to require
+            <strong>80GB+ of GPU VRAM</strong> — far beyond reach for students
+            and independent researchers. LoRA changed that entirely.
+          </p>
+          <p>
+            Introduced in the paper
+            <em>"LoRA: Low-Rank Adaptation of Large Language Models"</em> (Hu et
+            al., 2021), LoRA is a
+            <strong>parameter-efficient fine-tuning (PEFT)</strong> technique
+            that injects small trainable matrices into a frozen model. Instead
+            of updating billions of weights, you train only a few million —
+            achieving comparable results at a fraction of the computational
+            cost.
+          </p>
+          <p>
+            This is exactly what I used to build <strong>Edu-SLM</strong> — a
+            curriculum-aligned LLM fine-tuned on academic content using LoRA on
+            LLaMA 3.1 8B, running on a single GPU.
+          </p>
+
+          <h2>How LoRA Works: The Core Concept</h2>
+          <h3>The Math (Simplified)</h3>
+          <p>
+            In a standard transformer, each weight matrix <strong>W</strong> is
+            frozen. LoRA adds two small matrices — <strong>A</strong> and
+            <strong>B</strong> — whose product approximates the weight update:
+          </p>
+
+          <div class="code-block">
+            <span class="code-comment"
+              ># Standard: W is updated (expensive, billions of params)</span
+            >
+            <span class="code-key">W_new</span> = W + ΔW
+
+            <span class="code-comment"
+              ># LoRA: Only A and B are trained (rank r << d)</span
+            >
+            <span class="code-key">W_new</span> = W +
+            <span class="code-val">B × A</span>
+            <span class="code-comment"># A: (r × d_in), B: (d_out × r)</span>
+            <span class="code-comment"
+              ># Typical r = 8 or 16 → 10x-50x fewer params than full FT</span
+            >
+          </div>
+
+          <p>
+            The <strong>rank r</strong> controls the expressiveness vs.
+            efficiency tradeoff. For most fine-tuning tasks, r=8 to r=64 works
+            well.
+          </p>
+
+          <h3>What Gets Adapted?</h3>
+          <p>
+            LoRA is typically applied to the
+            <strong>attention weight matrices</strong> (Q, K, V, and output
+            projection) in transformer layers. The feed-forward layers are
+            usually left frozen, further reducing trainable parameters.
+          </p>
+
+          <h2>Step-by-Step: Fine-Tuning LLaMA 3 with LoRA</h2>
+          <h3>Step 1: Setup Environment</h3>
+          <div class="code-block">
+            <span class="code-key">pip install</span>
+            <span class="code-val"
+              >transformers peft accelerate bitsandbytes datasets trl</span
+            >
+            <span class="code-comment"
+              ># For even faster training, install Unsloth:</span
+            >
+            <span class="code-key">pip install</span>
+            <span class="code-val"
+              >"unsloth[colab-new] @
+              git+https://github.com/unslothai/unsloth.git"</span
+            >
+          </div>
+
+          <h3>Step 2: Load Base Model in 4-bit</h3>
+          <div class="code-block">
+            <span class="code-key">from</span> transformers
+            <span class="code-key">import</span> AutoModelForCausalLM,
+            BitsAndBytesConfig <span class="code-key">import</span> torch
+            bnb_config = BitsAndBytesConfig( load_in_4bit=<span class="code-val"
+              >True</span
+            >, bnb_4bit_quant_type=<span class="code-val">"nf4"</span>,
+            bnb_4bit_compute_dtype=torch.float16, ) model =
+            AutoModelForCausalLM.from_pretrained(
+            <span class="code-val">"meta-llama/Meta-Llama-3.1-8B-Instruct"</span
+            >, quantization_config=bnb_config, device_map=<span class="code-val"
+              >"auto"</span
+            >, )
+          </div>
+
+          <h3>Step 3: Inject LoRA Adapters</h3>
+          <div class="code-block">
+            <span class="code-key">from</span> peft
+            <span class="code-key">import</span> LoraConfig, get_peft_model
+            lora_config = LoraConfig( r=<span class="code-val">16</span>,
+            <span class="code-comment"># rank</span> lora_alpha=<span
+              class="code-val"
+              >32</span
+            >,
+            <span class="code-comment"># scaling factor</span>
+            target_modules=[<span class="code-val">"q_proj"</span>,
+            <span class="code-val">"v_proj"</span>], lora_dropout=<span
+              class="code-val"
+              >0.05</span
+            >, bias=<span class="code-val">"none"</span>, task_type=<span
+              class="code-val"
+              >"CAUSAL_LM"</span
+            >, ) model = get_peft_model(model, lora_config)
+            model.print_trainable_parameters()
+            <span class="code-comment"
+              ># trainable params: 4,194,304 || all params: 8,034,795,520</span
+            >
+            <span class="code-comment"
+              ># → Only 0.05% of parameters are trained!</span
+            >
+          </div>
+
+          <h3>Step 4: Prepare Your Dataset</h3>
+          <p>
+            Format your data as instruction-response pairs. For Edu-SLM, I used
+            curriculum-aligned QA pairs extracted from textbooks and structured
+            as chat templates:
+          </p>
+          <div class="code-block">
+            dataset_format = {
+            <span class="code-val">"instruction"</span>:
+            <span class="code-val"
+              >"Explain the concept of gradient descent."</span
+            >, <span class="code-val">"response"</span>:
+            <span class="code-val"
+              >"Gradient descent is an optimization algorithm..."</span
+            >
+            }
+          </div>
+
+          <h3>Step 5: Train with SFTTrainer</h3>
+          <div class="code-block">
+            <span class="code-key">from</span> trl
+            <span class="code-key">import</span> SFTTrainer
+            <span class="code-key">from</span> transformers
+            <span class="code-key">import</span> TrainingArguments trainer =
+            SFTTrainer( model=model, train_dataset=dataset,
+            args=TrainingArguments( output_dir=<span class="code-val"
+              >"./lora-output"</span
+            >, per_device_train_batch_size=<span class="code-val">2</span>,
+            gradient_accumulation_steps=<span class="code-val">4</span>,
+            learning_rate=<span class="code-val">2e-4</span>,
+            num_train_epochs=<span class="code-val">3</span>, fp16=<span
+              class="code-val"
+              >True</span
+            >, ), ) trainer.train()
+          </div>
+
+          <h2>LoRA Hyperparameters — What Actually Matters</h2>
+          <ul>
+            <li>
+              <strong>Rank (r):</strong> Higher rank = more capacity but more
+              memory. Start with r=8 or r=16.
+            </li>
+            <li>
+              <strong>Alpha:</strong> Keep alpha = 2× rank as a rule of thumb
+              (e.g., r=16, alpha=32).
+            </li>
+            <li>
+              <strong>Target modules:</strong> q_proj and v_proj is standard.
+              Add k_proj and o_proj for stronger adaptation.
+            </li>
+            <li>
+              <strong>Learning rate:</strong> 1e-4 to 3e-4 works well for most
+              tasks. Too high causes instability.
+            </li>
+            <li>
+              <strong>Epochs:</strong> 1–3 epochs usually sufficient. More can
+              cause overfitting.
+            </li>
+          </ul>
+
+          <h2>Combining LoRA with RAG (My Approach in Edu-SLM)</h2>
+          <p>
+            Fine-tuning alone has limitations — the model can still hallucinate
+            or give outdated answers. In Edu-SLM, I combined LoRA with
+            <strong>Retrieval-Augmented Generation (RAG)</strong>:
+          </p>
+          <ul>
+            <li>
+              Textbook content is chunked and embedded into a
+              <strong>FAISS vector index</strong>
+            </li>
+            <li>
+              At inference time, the query retrieves top-k relevant chunks
+            </li>
+            <li>
+              Retrieved context is injected into the prompt before the
+              fine-tuned model generates a response
+            </li>
+            <li>
+              This gives both <strong>domain-specific style</strong> (from LoRA)
+              and <strong>factual grounding</strong> (from RAG)
+            </li>
+          </ul>
+
+          <!-- Internal link CTA to Article 2 -->
+          <div class="int-cta">
+            <p>
+              Wondering when to use RAG vs fine-tuning for your project? Read my
+              deep-dive:
+              <strong>RAG vs Fine-Tuning: Which Should You Choose?</strong>
+            </p>
+            <a
+              onclick="showArticle('a2')"
+              href="#a2"
+              class="btn-primary"
+              style="font-size: 0.75rem; padding: 0.75rem 1.5rem"
+              >Read Article 2 →</a
+            >
+          </div>
+
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                <span>What is LoRA fine-tuning for LLMs?</span
+                ><span class="faq-toggle">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  LoRA (Low-Rank Adaptation) is a parameter-efficient
+                  fine-tuning technique that injects trainable low-rank matrices
+                  into a frozen pre-trained model. Instead of updating all model
+                  weights, LoRA only trains a small number of additional
+                  parameters, reducing GPU memory requirements by up to 10x
+                  while achieving comparable performance to full fine-tuning.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                <span>Can I fine-tune an LLM for free?</span
+                ><span class="faq-toggle">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Yes. Google Colab or Kaggle Notebooks offer free T4/P100 GPUs
+                  sufficient for LoRA fine-tuning of 7B models in 4-bit
+                  quantization. Tools like Unsloth further reduce memory usage,
+                  making it possible to fine-tune LLaMA 3 8B on a single free
+                  GPU in under 2 hours.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                <span
+                  >What's the difference between LoRA and full
+                  fine-tuning?</span
+                ><span class="faq-toggle">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Full fine-tuning updates all model parameters (billions of
+                  weights), requiring massive GPU memory and risking
+                  catastrophic forgetting. LoRA freezes the original weights and
+                  only trains small rank-decomposition matrices (&lt; 1% of
+                  total parameters), making it 10–50x more memory-efficient
+                  while preserving the base model's general capabilities.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              margin-top: 3rem;
+              padding-top: 2rem;
+              border-top: 1px solid var(--border2);
+              display: flex;
+              gap: 2rem;
+              flex-wrap: wrap;
+            "
+          >
+            <a
+              onclick="showMain()"
+              href="#home"
+              style="
+                font-family: var(--font-m);
+                font-size: 0.78rem;
+                color: var(--accent);
+                text-decoration: none;
+              "
+              >← Back to Portfolio</a
+            >
+            <a
+              href="https://linkedin.com/in/rudra-gupta"
+              target="_blank"
+              style="
+                font-family: var(--font-m);
+                font-size: 0.78rem;
+                color: var(--muted);
+                text-decoration: none;
+              "
+              >Connect on LinkedIn ↗</a
+            >
+            <a
+              href="https://github.com/BlackJack-14"
+              target="_blank"
+              style="
+                font-family: var(--font-m);
+                font-size: 0.78rem;
+                color: var(--muted);
+                text-decoration: none;
+              "
+              >GitHub ↗</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+     ARTICLE 2
+     Slug: /rag-vs-fine-tuning-ai-comparison
+     Primary keyword: RAG vs fine-tuning
+     Intent: Informational + Commercial
+════════════════════════════════════════ -->
+    <div id="a2" class="article-page">
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "RAG vs Fine-Tuning: Which Should You Choose for Your AI Application in 2025?",
+          "description": "A technical comparison of Retrieval-Augmented Generation (RAG) and LLM fine-tuning — with decision criteria, cost analysis, and when to combine both.",
+          "author": { "@type": "Person", "name": "Rudra Gupta" },
+          "datePublished": "2025-04-15",
+          "keywords": [
+            "RAG vs fine-tuning",
+            "retrieval augmented generation vs fine-tuning",
+            "when to use RAG",
+            "when to fine-tune LLM",
+            "RAG fine-tuning comparison 2025",
+            "LLM customization methods"
+          ]
+        }
+      </script>
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "When should I use RAG instead of fine-tuning?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use RAG when your application needs access to dynamic, frequently updated information; when you need to cite sources; when you have a large, searchable knowledge base; or when you want to avoid expensive retraining. RAG is faster to deploy and easier to update — you just add documents to the vector store."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is RAG better than fine-tuning for LLMs?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Neither is universally better — they solve different problems. RAG excels at providing up-to-date, retrievable knowledge. Fine-tuning excels at changing the model's behavior, style, reasoning patterns, or domain-specific language. For most production AI applications, combining both (RAG + LoRA) delivers the best results."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the cost difference between RAG and fine-tuning?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "RAG has negligible upfront cost — you just build a vector database. Fine-tuning requires GPU compute (1-10 hours for LoRA on a 7B model) but is a one-time cost. At inference time, RAG adds latency from retrieval. Fine-tuned models are self-contained but require retraining when knowledge updates."
+              }
+            }
+          ]
+        }
+      </script>
+
+      <div class="art-pg-header">
+        <div class="art-breadcrumb">
+          <a href="#home" onclick="showMain()">Home</a> →
+          <a
+            href="#articles"
+            onclick="
+              showMain();
+              setTimeout(
+                () => document.getElementById('articles').scrollIntoView(),
+                100,
+              );
+            "
+            >Articles</a
+          >
+          → RAG vs Fine-Tuning
+        </div>
+        <h1 class="art-pg-title">
+          RAG vs Fine-Tuning: Which Should You Choose for Your AI Application in
+          2025?
+        </h1>
+        <div class="art-pg-info">
+          <span>✍️ Rudra Gupta</span>
+          <span>📅 April 15, 2025</span>
+          <span>⏱ 12 min read</span>
+          <span>🏷 RAG · Fine-Tuning · LLM Architecture · AI Design</span>
+        </div>
+      </div>
+
+      <div class="art-pg-body-wrap">
+        <div class="art-pg-body">
+          <div class="snippet">
+            <div class="snippet-lbl">📌 Quick Answer — Featured Snippet</div>
+            <p>
+              <strong>RAG vs Fine-Tuning at a glance:</strong> Use
+              <strong>RAG</strong> when you need dynamic knowledge access,
+              source citations, or frequent updates. Use
+              <strong>fine-tuning</strong> when you need the model to behave
+              differently, adopt a new tone/format, or learn domain-specific
+              reasoning. Use <strong>both together</strong> for production AI
+              applications that need grounded, specialized responses — as in
+              Edu-SLM.
+            </p>
+          </div>
+
+          <h2>The Core Problem: LLMs Have Knowledge Gaps</h2>
+          <p>
+            Every LLM has a training cutoff and knows nothing about your private
+            documents, your company's internal data, or specialized domain
+            knowledge you've accumulated. To bridge this gap, developers have
+            two primary approaches:
+          </p>
+          <ul>
+            <li>
+              <strong>Retrieval-Augmented Generation (RAG):</strong> Give the
+              model access to external documents at inference time
+            </li>
+            <li>
+              <strong>Fine-tuning:</strong> Bake new knowledge and behavior
+              directly into the model weights
+            </li>
+          </ul>
+          <p>
+            The question isn't which is "better" — it's which fits your problem.
+            Both have entirely different tradeoffs.
+          </p>
+
+          <h2>What is RAG? How It Works</h2>
+          <h3>The RAG Pipeline</h3>
+          <p>RAG follows a <strong>retrieve-then-generate</strong> pattern:</p>
+          <ul>
+            <li>
+              <strong>Indexing:</strong> Your documents are chunked and embedded
+              into a vector database (FAISS, Chroma, Pinecone)
+            </li>
+            <li>
+              <strong>Retrieval:</strong> At query time, the top-k most
+              semantically similar chunks are retrieved
+            </li>
+            <li>
+              <strong>Augmentation:</strong> Retrieved chunks are injected into
+              the prompt as context
+            </li>
+            <li>
+              <strong>Generation:</strong> The LLM generates a response grounded
+              in the provided context
+            </li>
+          </ul>
+          <p>
+            I implemented this architecture in <strong>TheGeetaWay</strong> —
+            using FAISS + Sentence-Transformers to retrieve relevant Bhagavad
+            Gita verses, then feeding them to Llama 3 for context-aware
+            responses. The model never needed fine-tuning because the knowledge
+            was fully contained in the retrieval index.
+          </p>
+
+          <h3>When RAG Shines</h3>
+          <ul>
+            <li>
+              Knowledge that changes frequently (news, research papers, product
+              catalogs)
+            </li>
+            <li>
+              Applications requiring <strong>source citations</strong> and
+              verifiable answers
+            </li>
+            <li>Large, searchable document corpora (&gt; 10k documents)</li>
+            <li>When you want <strong>zero GPU training cost</strong></li>
+            <li>
+              When updating knowledge should happen instantly (just add to
+              vector store)
+            </li>
+          </ul>
+
+          <h2>What is Fine-Tuning? How It Works</h2>
+          <h3>The Fine-Tuning Paradigm</h3>
+          <p>
+            Fine-tuning <strong>modifies the model's weights</strong> by
+            training on a task-specific dataset. With LoRA (see my
+            <a onclick="showArticle('a1')" href="#a1">LoRA fine-tuning guide</a
+            >), this process is memory-efficient and fast.
+          </p>
+          <p>
+            Unlike RAG, the knowledge is
+            <strong>baked into the model parameters</strong> — no external
+            retrieval step at inference. The model itself becomes the expert.
+          </p>
+
+          <h3>When Fine-Tuning Shines</h3>
+          <ul>
+            <li>
+              Teaching the model a <strong>new output format</strong> (JSON,
+              code, tables)
+            </li>
+            <li>
+              Changing <strong>response style or tone</strong> (formal,
+              clinical, conversational)
+            </li>
+            <li>
+              Teaching domain-specific
+              <strong>reasoning patterns</strong> (medical diagnosis, legal
+              interpretation)
+            </li>
+            <li>
+              Improving performance on a narrow,
+              <strong>well-defined task</strong>
+            </li>
+            <li>When inference speed matters (no retrieval latency)</li>
+          </ul>
+
+          <h2>Head-to-Head Comparison</h2>
+
+          <div class="code-block">
+            ┌─────────────────────┬──────────────────────┬──────────────────────┐
+            │ Criterion │ RAG │ Fine-Tuning (LoRA) │
+            ├─────────────────────┼──────────────────────┼──────────────────────┤
+            │ Setup time │ Hours │ Days │ │ GPU cost │ Minimal │ Moderate (free
+            tier) │ │ Knowledge update │ Instant │ Retrain required │ │ Source
+            citation │ Native │ Not built-in │ │ Behavior change │ Limited │
+            Strong │ │ Style adaptation │ Prompt-only │ Deep │ │ Hallucination
+            risk │ Lower (grounded) │ Higher │ │ Inference speed │ Slower
+            (retrieval) │ Faster │
+            └─────────────────────┴──────────────────────┴──────────────────────┘
+          </div>
+
+          <h2>The Best of Both: RAG + Fine-Tuning Together</h2>
+          <p>
+            In my <strong>Edu-SLM project</strong>, I combined both — and this
+            hybrid approach is increasingly what production AI systems use:
+          </p>
+          <ul>
+            <li>
+              <strong>LoRA fine-tuning</strong> taught the model academic
+              response style, structured explanation format, and educational
+              reasoning patterns
+            </li>
+            <li>
+              <strong>RAG</strong> provided real-time retrieval of
+              curriculum-specific content from a FAISS-indexed textbook corpus
+            </li>
+            <li>
+              Result: A model that
+              <strong>responds like an educator</strong> and
+              <strong>answers from verified sources</strong>
+            </li>
+          </ul>
+          <p>
+            This combination is sometimes called
+            <strong>"fine-tuned RAG"</strong> or
+            <strong>"grounded fine-tuning"</strong> and represents the current
+            state-of-the-art for domain-specific LLM applications.
+          </p>
+
+          <h2>Decision Framework: Which Should You Choose?</h2>
+          <p>Ask yourself these three questions:</p>
+          <ul>
+            <li>
+              <strong>"Does my knowledge change frequently?"</strong> → Yes: use
+              RAG. No: consider fine-tuning.
+            </li>
+            <li>
+              <strong>"Do I need to change how the model behaves?"</strong> →
+              Yes: fine-tuning. No: RAG + prompt engineering.
+            </li>
+            <li>
+              <strong>"Do I have GPU resources?"</strong> → No: RAG only. Yes:
+              evaluate fine-tuning.
+            </li>
+          </ul>
+
+          <!-- Internal CTA back to Article 1 -->
+          <div class="int-cta">
+            <p>
+              Ready to implement LoRA? Read the hands-on guide:
+              <strong
+                >How to Fine-Tune LLMs with LoRA (with code examples)</strong
+              >.
+            </p>
+            <a
+              onclick="showArticle('a1')"
+              href="#a1"
+              class="btn-primary"
+              style="font-size: 0.75rem; padding: 0.75rem 1.5rem"
+              >Read Article 1 →</a
+            >
+          </div>
+
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                <span>When should I use RAG instead of fine-tuning?</span
+                ><span class="faq-toggle">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Use RAG when your application needs access to dynamic,
+                  frequently updated information; when you need to cite sources;
+                  when you have a large, searchable knowledge base; or when you
+                  want to avoid expensive retraining. RAG is faster to deploy
+                  and easier to update — you just add documents to the vector
+                  store.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                <span>Is RAG better than fine-tuning for LLMs?</span
+                ><span class="faq-toggle">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  Neither is universally better — they solve different problems.
+                  RAG excels at providing up-to-date, retrievable knowledge.
+                  Fine-tuning excels at changing the model's behavior, style,
+                  and reasoning patterns. For most production AI applications,
+                  combining both delivers the best results.
+                </p>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                <span
+                  >What is the cost difference between RAG and
+                  fine-tuning?</span
+                ><span class="faq-toggle">+</span>
+              </button>
+              <div class="faq-a">
+                <p>
+                  RAG has negligible upfront cost — you just build a vector
+                  database. Fine-tuning requires GPU compute (1–10 hours for
+                  LoRA on a 7B model) but is a one-time cost. At inference time,
+                  RAG adds latency from retrieval. Fine-tuned models are
+                  self-contained but require retraining when knowledge updates.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              margin-top: 3rem;
+              padding-top: 2rem;
+              border-top: 1px solid var(--border2);
+              display: flex;
+              gap: 2rem;
+              flex-wrap: wrap;
+            "
+          >
+            <a
+              onclick="showMain()"
+              href="#home"
+              style="
+                font-family: var(--font-m);
+                font-size: 0.78rem;
+                color: var(--accent);
+                text-decoration: none;
+              "
+              >← Back to Portfolio</a
+            >
+            <a
+              href="https://github.com/BlackJack-14"
+              target="_blank"
+              style="
+                font-family: var(--font-m);
+                font-size: 0.78rem;
+                color: var(--muted);
+                text-decoration: none;
+              "
+              >See My Projects on GitHub ↗</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ JS ═══ -->
+    <script>
+      // ═══════════════════════════════════════════
+      //  PARTICLE FIELD — animated network background
+      // ═══════════════════════════════════════════
+      (function () {
+        const container = document.getElementById("particle-bg");
+        if (!container) return;
+        const canvas = document.createElement("canvas");
+        container.appendChild(canvas);
+        const ctx = canvas.getContext("2d");
+
+        let W,
+          H,
+          particles = [],
+          mouse = { x: -9999, y: -9999 };
+        let scrollY = 0;
+
+        function resize() {
+          W = canvas.width = window.innerWidth;
+          H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+        window.addEventListener(
+          "scroll",
+          () => {
+            scrollY = window.scrollY;
+          },
+          { passive: true },
+        );
+
+        document.addEventListener("mousemove", (e) => {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+        });
+
+        // Create particles — two types: bright nodes + dim ambient
+        const COUNT = Math.min(150, Math.floor((W * H) / 10000));
+        const colors = ["91,156,245", "201,168,76"]; // blue, gold
+        for (let i = 0; i < COUNT; i++) {
+          const isBright = i < COUNT * 0.35;
+          const color = colors[Math.random() < 0.6 ? 0 : 1]; // 60% blue, 40% gold
+          particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            baseX: Math.random() * W,
+            baseY: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            r: isBright ? 1.8 + Math.random() * 2 : 0.8 + Math.random() * 1,
+            alpha: isBright
+              ? 0.5 + Math.random() * 0.4
+              : 0.15 + Math.random() * 0.2,
+            color: color,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: 0.005 + Math.random() * 0.015,
+            drift: Math.random() * Math.PI * 2,
+            driftSpeed: 0.0003 + Math.random() * 0.0008,
+            driftRadius: 20 + Math.random() * 60,
+          });
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          const t = performance.now() * 0.001;
+          const scrollOffset = scrollY * 0.05;
+
+          // Update and draw particles
+          for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            p.drift += p.driftSpeed;
+            p.pulse += p.pulseSpeed;
+
+            // Drift motion (slow sine wave)
+            const driftX = Math.sin(p.drift) * p.driftRadius;
+            const driftY = Math.cos(p.drift * 0.7) * p.driftRadius * 0.6;
+
+            // Apply velocity
+            p.baseX += p.vx;
+            p.baseY += p.vy;
+
+            // Wrap around
+            if (p.baseX < -50) p.baseX = W + 50;
+            if (p.baseX > W + 50) p.baseX = -50;
+            if (p.baseY < -50) p.baseY = H + 50;
+            if (p.baseY > H + 50) p.baseY = -50;
+
+            // Final position with drift + scroll parallax
+            p.x = p.baseX + driftX;
+            p.y = p.baseY + driftY - scrollOffset * (0.3 + p.r * 0.1);
+
+            // Mouse interaction — strong pull toward cursor
+            const dx = mouse.x - p.x;
+            const dy = mouse.y - p.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            let mouseBoost = 0;
+            if (dist < 280 && dist > 0) {
+              const t = 1 - dist / 280;
+              const force = t * t * 3.5; // quadratic ramp, strong pull
+              p.x += (dx / dist) * force;
+              p.y += (dy / dist) * force;
+              mouseBoost = t * 0.6; // extra brightness near cursor
+            }
+
+            // Pulsing alpha + mouse boost
+            const a = Math.min(
+              1,
+              p.alpha + Math.sin(p.pulse) * 0.15 + mouseBoost,
+            );
+
+            // Glow effect — bigger and brighter near cursor
+            if (p.r > 1.2) {
+              const glowSize = p.r * (4 + mouseBoost * 3);
+              const gradient = ctx.createRadialGradient(
+                p.x,
+                p.y,
+                0,
+                p.x,
+                p.y,
+                glowSize,
+              );
+              gradient.addColorStop(0, `rgba(${p.color},${a * 0.5})`);
+              gradient.addColorStop(1, `rgba(${p.color},0)`);
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, glowSize, 0, Math.PI * 2);
+              ctx.fillStyle = gradient;
+              ctx.fill();
+            }
+
+            // Core dot — scale up near cursor
+            const drawR = p.r + mouseBoost * 2;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, drawR, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${p.color},${a})`;
+            ctx.fill();
+          }
+
+          // Cursor glow — soft radial light that follows the mouse
+          if (mouse.x > 0 && mouse.y > 0) {
+            const cursorGrad = ctx.createRadialGradient(
+              mouse.x,
+              mouse.y,
+              0,
+              mouse.x,
+              mouse.y,
+              180,
+            );
+            cursorGrad.addColorStop(0, "rgba(91,156,245,0.06)");
+            cursorGrad.addColorStop(0.5, "rgba(201,168,76,0.02)");
+            cursorGrad.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 180, 0, Math.PI * 2);
+            ctx.fillStyle = cursorGrad;
+            ctx.fill();
+          }
+
+          // Draw connections between nearby particles
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 180) {
+                // Brighter lines near cursor
+                const midX = (particles[i].x + particles[j].x) / 2;
+                const midY = (particles[i].y + particles[j].y) / 2;
+                const cdx = mouse.x - midX;
+                const cdy = mouse.y - midY;
+                const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+                const cursorBoost = cdist < 250 ? (1 - cdist / 250) * 0.15 : 0;
+
+                const alpha = (0.12 + cursorBoost) * (1 - dist / 180);
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(${particles[i].color},${alpha})`;
+                ctx.lineWidth = 0.6 + cursorBoost * 2;
+                ctx.stroke();
+              }
+            }
+          }
+
+          // Occasional bright pulse traveling along a connection
+          if (Math.random() < 0.008) {
+            const i = Math.floor(Math.random() * particles.length);
+            const p = particles[i];
+            const gradient = ctx.createRadialGradient(
+              p.x,
+              p.y,
+              0,
+              p.x,
+              p.y,
+              30,
+            );
+            gradient.addColorStop(0, `rgba(${p.color},0.3)`);
+            gradient.addColorStop(1, `rgba(${p.color},0)`);
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 30, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+          }
+
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
+    </script>
+    <script>
+      // ═══════════════════════════════════════════
+      //  GSAP SCROLL ANIMATIONS
+      // ═══════════════════════════════════════════
+      (function () {
+        if (
+          typeof gsap === "undefined" ||
+          typeof ScrollTrigger === "undefined"
+        ) {
+          return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ─── Hero entrance — dramatic staggered reveal ───
+        const heroTL = gsap.timeline({ defaults: { ease: "expo.out" } });
+        heroTL
+          .fromTo(
+            ".hero-badge",
+            { y: 50, opacity: 0, scale: 0.8 },
+            { y: 0, opacity: 1, scale: 1, duration: 1 },
+            0.1,
+          )
+          .fromTo(
+            ".hero-title",
+            { y: 80, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2 },
+            0.2,
+          )
+          .fromTo(
+            ".hero-title-glow",
+            { filter: "blur(20px)", opacity: 0 },
+            { filter: "blur(0px)", opacity: 1, duration: 1.4 },
+            0.4,
+          )
+          .fromTo(
+            ".hero-role",
+            { y: 40, opacity: 0, letterSpacing: "0.4em" },
+            { y: 0, opacity: 1, letterSpacing: "0.1em", duration: 1 },
+            0.6,
+          )
+          .fromTo(
+            ".hero-desc",
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.9 },
+            0.8,
+          )
+          .fromTo(
+            ".hero-btns",
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.9 },
+            1.0,
+          )
+          .fromTo(
+            ".hero-terminal",
+            { y: 80, opacity: 0, rotateX: 12 },
+            { y: 0, opacity: 1, rotateX: 0, duration: 1.4 },
+            0.5,
+          )
+          .fromTo(
+            ".hero-stats",
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.9 },
+            1.2,
+          );
+
+        // Terminal lines — typewriter cascade
+        const termLines = document.querySelectorAll("#terminal .t-line");
+        termLines.forEach((line, i) => {
+          heroTL.fromTo(
+            line,
+            { opacity: 0, x: -15 },
+            { opacity: 1, x: 0, duration: 0.4 },
+            1.4 + i * 0.18,
+          );
+        });
+
+        // ─── About section — dramatic reveal ───
+        const aboutSec = document.getElementById("about-me");
+        if (aboutSec) {
+          const aboutTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: aboutSec,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+          aboutTL
+            .fromTo(
+              aboutSec.querySelector(".sec-tag"),
+              { x: -80, opacity: 0, filter: "blur(8px)" },
+              { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.9 },
+              0,
+            )
+            .fromTo(
+              aboutSec.querySelector(".sec-title"),
+              { y: 80, opacity: 0, filter: "blur(12px)" },
+              { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2 },
+              0.1,
+            )
+            .fromTo(
+              aboutSec.querySelector(".sec-sub"),
+              { y: 50, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.9 },
+              0.25,
+            );
+
+          // Bento cells — each slides in from a different direction
+          const cells = aboutSec.querySelectorAll(".bento-cell");
+          const directions = [
+            { x: -100, y: 0 }, // from left
+            { x: 0, y: 100 }, // from bottom
+            { x: 100, y: 0 }, // from right
+            { x: 0, y: 100 }, // from bottom
+          ];
+          cells.forEach((cell, i) => {
+            const dir = directions[i % directions.length];
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: cell,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            });
+            tl.fromTo(
+              cell,
+              {
+                x: dir.x,
+                y: dir.y,
+                opacity: 0,
+                scale: 0.85,
+                rotateY: dir.x !== 0 ? 8 : 0,
+              },
+              {
+                x: 0,
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                rotateY: 0,
+                duration: 1.2,
+                ease: "expo.out",
+              },
+            );
+            // Animate inner content with stagger
+            const label = cell.querySelector(".bento-label");
+            const title = cell.querySelector(".bento-title");
+            const text = cell.querySelector(".bento-text");
+            const tags = cell.querySelectorAll(".bento-tag");
+            if (label)
+              tl.fromTo(
+                label,
+                { x: -20, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.6 },
+                0.3,
+              );
+            if (title)
+              tl.fromTo(
+                title,
+                { y: 15, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.7 },
+                0.4,
+              );
+            if (text)
+              tl.fromTo(
+                text,
+                { y: 15, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.7 },
+                0.5,
+              );
+            if (tags.length)
+              tl.fromTo(
+                tags,
+                { y: 10, opacity: 0, scale: 0.8 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.5,
+                  stagger: 0.06,
+                  ease: "back.out(1.7)",
+                },
+                0.6,
+              );
+          });
+        }
+
+        // ─── Journey section — cascade reveal ───
+        const journeySec = document.getElementById("journey");
+        if (journeySec) {
+          const jTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: journeySec,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+          jTL
+            .fromTo(
+              journeySec.querySelector(".sec-tag"),
+              { x: -80, opacity: 0, filter: "blur(8px)" },
+              { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.9 },
+              0,
+            )
+            .fromTo(
+              journeySec.querySelector(".sec-title"),
+              { y: 80, opacity: 0, filter: "blur(12px)" },
+              { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2 },
+              0.1,
+            )
+            .fromTo(
+              journeySec.querySelector(".sec-sub"),
+              { y: 50, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.9 },
+              0.25,
+            );
+
+          // Timeline nodes — each slides in with inner content reveal
+          document.querySelectorAll(".tl-node").forEach((node, i) => {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: node,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            });
+            tl.fromTo(
+              node,
+              { x: -120, opacity: 0, scale: 0.85 },
+              { x: 0, opacity: 1, scale: 1, duration: 1.1, ease: "expo.out" },
+            );
+            const yr = node.querySelector(".tl-yr");
+            const role = node.querySelector(".tl-role");
+            const sub = node.querySelector(".tl-sub");
+            const desc = node.querySelector(".tl-desc");
+            if (yr)
+              tl.fromTo(
+                yr,
+                { x: -20, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.5 },
+                0.3,
+              );
+            if (role)
+              tl.fromTo(
+                role,
+                { y: 15, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6 },
+                0.4,
+              );
+            if (sub)
+              tl.fromTo(
+                sub,
+                { y: 15, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6 },
+                0.5,
+              );
+            if (desc)
+              tl.fromTo(
+                desc,
+                { y: 10, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5 },
+                0.6,
+              );
+          });
+        }
+
+        // ─── Skills section — cards rise, pills pop ───
+        const skillsSec = document.getElementById("skills");
+        if (skillsSec) {
+          const sTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: skillsSec,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+          sTL
+            .fromTo(
+              skillsSec.querySelector(".sec-tag"),
+              { x: -80, opacity: 0, filter: "blur(8px)" },
+              { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.9 },
+              0,
+            )
+            .fromTo(
+              skillsSec.querySelector(".sec-title"),
+              { y: 80, opacity: 0, filter: "blur(12px)" },
+              { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2 },
+              0.1,
+            )
+            .fromTo(
+              skillsSec.querySelector(".sec-sub"),
+              { y: 50, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.9 },
+              0.25,
+            );
+
+          // Skill category cards — each with inner content stagger
+          document.querySelectorAll(".skill-category").forEach((cat, i) => {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: cat,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            });
+            tl.fromTo(
+              cat,
+              { y: 100, opacity: 0, scale: 0.88, rotateX: 8 },
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                rotateX: 0,
+                duration: 1.2,
+                ease: "expo.out",
+                delay: i * 0.12,
+              },
+            );
+            const icon = cat.querySelector(".skill-cat-icon");
+            const title = cat.querySelector(".skill-cat-title");
+            const pills = cat.querySelectorAll(".skill-pill");
+            if (icon)
+              tl.fromTo(
+                icon,
+                { scale: 0, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(2)" },
+                0.3,
+              );
+            if (title)
+              tl.fromTo(
+                title,
+                { x: -20, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.6 },
+                0.4,
+              );
+            if (pills.length)
+              tl.fromTo(
+                pills,
+                { y: 15, opacity: 0, scale: 0.7 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.5,
+                  stagger: 0.04,
+                  ease: "back.out(1.7)",
+                },
+                0.5,
+              );
+          });
+        }
+
+        // ─── Experience section ───
+        const expSec = document.getElementById("experience");
+        if (expSec) {
+          const eTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: expSec,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+          eTL
+            .fromTo(
+              expSec.querySelector(".sec-tag"),
+              { x: -60, opacity: 0 },
+              { x: 0, opacity: 1, duration: 0.8 },
+              0,
+            )
+            .fromTo(
+              expSec.querySelector(".sec-title"),
+              { y: 60, opacity: 0 },
+              { y: 0, opacity: 1, duration: 1 },
+              0.1,
+            )
+            .fromTo(
+              expSec.querySelector(".sec-sub"),
+              { y: 40, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.8 },
+              0.2,
+            );
+
+          // Experience cards — slide in from left
+          gsap.fromTo(
+            ".exp-card",
+            { x: -80, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 1,
+              stagger: 0.2,
+              ease: "expo.out",
+              scrollTrigger: { trigger: ".exp-list", start: "top 80%" },
+            },
+          );
+
+          // Ladder rungs — cascade from left
+          gsap.fromTo(
+            ".ladder-rung",
+            { x: -100, opacity: 0, scale: 0.9 },
+            {
+              x: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              stagger: 0.25,
+              ease: "expo.out",
+              scrollTrigger: { trigger: ".ladder", start: "top 85%" },
+            },
+          );
+        }
+
+        // ─── Projects section — cards rise with tilt ───
+        const projSec = document.getElementById("projects");
+        if (projSec) {
+          const pTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: projSec,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+          pTL
+            .fromTo(
+              projSec.querySelector(".sec-tag"),
+              { x: -80, opacity: 0, filter: "blur(8px)" },
+              { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.9 },
+              0,
+            )
+            .fromTo(
+              projSec.querySelector(".sec-title"),
+              { y: 80, opacity: 0, filter: "blur(12px)" },
+              { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2 },
+              0.1,
+            )
+            .fromTo(
+              projSec.querySelector(".sec-sub"),
+              { y: 50, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.9 },
+              0.25,
+            );
+
+          // Project masonry cards — each with inner content reveal
+          document.querySelectorAll(".proj-masonry-card").forEach((card, i) => {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: card,
+                start: "top 92%",
+                toggleActions: "play none none none",
+              },
+            });
+            tl.fromTo(
+              card,
+              { y: 120, opacity: 0, scale: 0.88, rotateX: 10 },
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                rotateX: 0,
+                duration: 1.3,
+                ease: "expo.out",
+                delay: i * 0.15,
+              },
+            );
+            const icon = card.querySelector(".proj-m-icon");
+            const title = card.querySelector("h3");
+            const desc = card.querySelector(".proj-m-desc");
+            const stack = card.querySelector(".proj-m-stack");
+            const link = card.querySelector(".proj-m-link");
+            if (icon)
+              tl.fromTo(
+                icon,
+                { scale: 0, rotation: -20 },
+                { scale: 1, rotation: 0, duration: 0.7, ease: "back.out(2)" },
+                0.3,
+              );
+            if (title)
+              tl.fromTo(
+                title,
+                { y: 15, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6 },
+                0.4,
+              );
+            if (desc)
+              tl.fromTo(
+                desc,
+                { y: 10, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5 },
+                0.5,
+              );
+            if (stack)
+              tl.fromTo(
+                stack.children,
+                { y: 8, opacity: 0, scale: 0.8 },
+                { y: 0, opacity: 1, scale: 1, duration: 0.4, stagger: 0.04 },
+                0.6,
+              );
+            if (link)
+              tl.fromTo(
+                link,
+                { x: -10, opacity: 0 },
+                { x: 0, opacity: 1, duration: 0.5 },
+                0.7,
+              );
+          });
+        }
+
+        // ─── Articles section ───
+        const artSec = document.getElementById("articles");
+        if (artSec) {
+          const aTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: artSec,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+          aTL
+            .fromTo(
+              artSec.querySelector(".sec-tag"),
+              { x: -60, opacity: 0 },
+              { x: 0, opacity: 1, duration: 0.8 },
+              0,
+            )
+            .fromTo(
+              artSec.querySelector(".sec-title"),
+              { y: 60, opacity: 0 },
+              { y: 0, opacity: 1, duration: 1 },
+              0.1,
+            )
+            .fromTo(
+              artSec.querySelector(".sec-sub"),
+              { y: 40, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.8 },
+              0.2,
+            );
+
+          // Article cards — stagger from center
+          gsap.fromTo(
+            ".art-card",
+            { y: 80, opacity: 0, scale: 0.93 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 1.1,
+              stagger: 0.2,
+              ease: "expo.out",
+              scrollTrigger: { trigger: ".articles-grid", start: "top 85%" },
+            },
+          );
+        }
+
+        // ─── Achievements section ───
+        const achSec = document.querySelector(".ach-grid");
+        if (achSec) {
+          gsap.fromTo(
+            ".ach-card",
+            { y: 60, opacity: 0, scale: 0.9 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.9,
+              stagger: 0.12,
+              ease: "expo.out",
+              scrollTrigger: { trigger: ".ach-grid", start: "top 85%" },
+            },
+          );
+        }
+
+        // ─── Contact section — links spring in, form slides up ───
+        const contactSec = document.getElementById("contact");
+        if (contactSec) {
+          const cTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: contactSec,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          });
+          cTL
+            .fromTo(
+              contactSec.querySelector(".sec-tag"),
+              { x: -80, opacity: 0, filter: "blur(8px)" },
+              { x: 0, opacity: 1, filter: "blur(0px)", duration: 0.9 },
+              0,
+            )
+            .fromTo(
+              contactSec.querySelector(".sec-title"),
+              { y: 80, opacity: 0, filter: "blur(12px)" },
+              { y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2 },
+              0.1,
+            )
+            .fromTo(
+              contactSec.querySelector(".sec-sub"),
+              { y: 50, opacity: 0 },
+              { y: 0, opacity: 1, duration: 0.9 },
+              0.25,
+            );
+
+          // Contact links — each with inner icon reveal
+          document.querySelectorAll(".c-link").forEach((link, i) => {
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: link,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            });
+            tl.fromTo(
+              link,
+              { y: 60, opacity: 0, scale: 0.85 },
+              {
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                duration: 1,
+                ease: "back.out(1.4)",
+                delay: i * 0.1,
+              },
+            );
+            const icon = link.querySelector(".c-link-icon");
+            const label = link.querySelector(".c-link-label");
+            const val = link.querySelector(".c-link-val");
+            if (icon)
+              tl.fromTo(
+                icon,
+                { scale: 0, rotation: -30 },
+                { scale: 1, rotation: 0, duration: 0.7, ease: "back.out(2)" },
+                0.3,
+              );
+            if (label)
+              tl.fromTo(
+                label,
+                { y: 10, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5 },
+                0.4,
+              );
+            if (val)
+              tl.fromTo(
+                val,
+                { y: 10, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5 },
+                0.5,
+              );
+          });
+
+          // Contact form — slide up with field stagger
+          const form = contactSec.querySelector(".contact-form");
+          if (form) {
+            const fTL = gsap.timeline({
+              scrollTrigger: {
+                trigger: form,
+                start: "top 90%",
+                toggleActions: "play none none none",
+              },
+            });
+            fTL.fromTo(
+              form,
+              { y: 80, opacity: 0 },
+              { y: 0, opacity: 1, duration: 1.2, ease: "expo.out" },
+            );
+            const fields = form.querySelectorAll(".fg");
+            const btn = form.querySelector(".form-btn");
+            if (fields.length)
+              fTL.fromTo(
+                fields,
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
+                0.3,
+              );
+            if (btn)
+              fTL.fromTo(
+                btn,
+                { y: 20, opacity: 0, scale: 0.9 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.7,
+                  ease: "back.out(1.4)",
+                },
+                0.6,
+              );
+          }
+        }
+
+        // ─── Hero parallax — fade + scale on scroll ───
+        gsap.to("#home", {
+          scrollTrigger: {
+            trigger: "#home",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+          y: 120,
+          scale: 0.92,
+          opacity: 0.2,
+          ease: "none",
+        });
+
+        // ─── Section parallax — alternating depth ───
+        gsap.utils.toArray("section:not(#home)").forEach((sec, i) => {
+          gsap.to(sec, {
+            scrollTrigger: {
+              trigger: sec,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.5,
+            },
+            y: i % 2 === 0 ? -20 : 20,
+            ease: "none",
+          });
+        });
+
+        // ─── Footer reveal ───
+        gsap.fromTo(
+          "footer",
+          { y: 50, opacity: 0 },
+          {
+            scrollTrigger: { trigger: "footer", start: "top 95%" },
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "expo.out",
+          },
+        );
+      })();
+    </script>
+
+    <script>
+      // ═══════════════════════════════════════════
+      //  3D CARD TILT — cursor-tracking perspective
+      // ═══════════════════════════════════════════
+      document
+        .querySelectorAll(".proj-masonry-card, .ach-card, .c-link, .bento-cell")
+        .forEach((card) => {
+          card.classList.add("card-3d");
+
+          // Add shine overlay
+          const shine = document.createElement("div");
+          shine.className = "card-shine";
+          card.style.position = "relative";
+          card.appendChild(shine);
+
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            const tiltX = (y - 0.5) * 12;
+            const tiltY = (x - 0.5) * -12;
+
+            card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px) scale(1.02)`;
+            card.style.setProperty("--mouse-x", x * 100 + "%");
+            card.style.setProperty("--mouse-y", y * 100 + "%");
+            card.classList.add("tilted");
+          });
+
+          card.addEventListener("mouseleave", () => {
+            card.style.transform =
+              "perspective(800px) rotateX(0) rotateY(0) translateY(0) scale(1)";
+            card.classList.remove("tilted");
+          });
+        });
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        document
+          .getElementById("navbar")
+          .classList.toggle("scrolled", window.scrollY > 40);
+      });
+
+      // Skill pill fill animation on scroll
+      const skillIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              const pills = e.target.querySelectorAll(".skill-pill");
+              pills.forEach((pill, i) => {
+                setTimeout(() => pill.classList.add("filled"), i * 60);
+              });
+              skillIO.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+
+      document.querySelectorAll(".skill-category").forEach((cat) => {
+        skillIO.observe(cat);
+      });
+
+      // Magnetic button effect — buttons subtly pull toward cursor
+      document
+        .querySelectorAll(".btn-primary, .btn-outline, .nav-cta")
+        .forEach((btn) => {
+          btn.classList.add("btn-magnetic");
+          btn.addEventListener("mousemove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+          });
+          btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "translate(0,0)";
+          });
+        });
+
+      // Count-up stats
+      const countEls = document.querySelectorAll("[data-count]");
+      const countIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const el = e.target;
+              const target = +el.dataset.count;
+              const isDecimal = target === 8;
+              let start = 0;
+              const dur = 1200;
+              const step = () => {
+                start += dur / 60;
+                const progress = Math.min(start / dur, 1);
+                const val = isDecimal
+                  ? (progress * target).toFixed(1)
+                  : Math.floor(progress * target);
+                el.textContent =
+                  val + (target === 8 ? "" : target === 10 ? "+" : "+");
+                if (progress < 1) requestAnimationFrame(step);
+              };
+              requestAnimationFrame(step);
+              countIO.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+      countEls.forEach((el) => countIO.observe(el));
+
+      // Page routing
+      function showMain() {
+        document.getElementById("main-site").style.display = "block";
+        document.getElementById("a1").classList.remove("active");
+        document.getElementById("a2").classList.remove("active");
+        window.scrollTo(0, 0);
+      }
+      function showArticle(id) {
+        document.getElementById("main-site").style.display = "none";
+        document.getElementById("a1").classList.remove("active");
+        document.getElementById("a2").classList.remove("active");
+        document.getElementById(id).classList.add("active");
+        window.scrollTo(0, 0);
+      }
+
+      // ─── CUSTOM CURSOR ───
+      (function () {
+        const dot = document.getElementById("cursor-dot");
+        const ring = document.getElementById("cursor-ring");
+        const glow = document.getElementById("cursor-glow");
+        if (!dot || !ring || !glow) return;
+
+        let mx = 0,
+          my = 0,
+          dx = 0,
+          dy = 0,
+          gx = 0,
+          gy = 0;
+
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+        });
+
+        function animate() {
+          // Dot follows instantly
+          dot.style.left = mx + "px";
+          dot.style.top = my + "px";
+
+          // Ring follows with lag
+          dx += (mx - dx) * 0.15;
+          dy += (my - dy) * 0.15;
+          ring.style.left = dx + "px";
+          ring.style.top = dy + "px";
+
+          // Glow follows with more lag
+          gx += (mx - gx) * 0.06;
+          gy += (my - gy) * 0.06;
+          glow.style.left = gx + "px";
+          glow.style.top = gy + "px";
+
+          requestAnimationFrame(animate);
+        }
+        animate();
+
+        // Hover effect on interactive elements
+        const hoverEls =
+          "a,button,.btn-primary,.btn-outline,.nav-cta,.bento-tag,.skill-pill,.c-link,.proj-masonry-card,.ach-card,.art-card,.faq-q,.t-dot";
+        document.querySelectorAll(hoverEls).forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            dot.classList.add("hover");
+            ring.classList.add("hover");
+          });
+          el.addEventListener("mouseleave", () => {
+            dot.classList.remove("hover");
+            ring.classList.remove("hover");
+          });
+        });
+      })();
+
+      // FAQ
+      // Mobile menu
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        const btn = document.querySelector(".nav-hamburger");
+        menu.classList.toggle("open");
+        btn.classList.toggle("open");
+      }
+      function closeMobileMenu() {
+        document.getElementById("mobile-menu").classList.remove("open");
+        document.querySelector(".nav-hamburger").classList.remove("open");
+      }
+
+      function toggleFaq(btn) {
+        btn.parentElement.classList.toggle("open");
+      }
+    </script>
+
+    <script>
+      // ═══════════════════════════════════════════
+      //  THREE.JS — Floating wireframe geometry
+      // ═══════════════════════════════════════════
+      (function () {
+        const canvas = document.getElementById("hero-3d");
+        if (!canvas || typeof THREE === "undefined") return;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000,
+        );
+        camera.position.z = 30;
+
+        const renderer = new THREE.WebGLRenderer({
+          canvas,
+          alpha: true,
+          antialias: true,
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
+
+        // Materials
+        const blueMat = new THREE.LineBasicMaterial({
+          color: 0x5b9cf5,
+          transparent: true,
+          opacity: 0.3,
+        });
+        const goldMat = new THREE.LineBasicMaterial({
+          color: 0xc9a84c,
+          transparent: true,
+          opacity: 0.2,
+        });
+
+        // Create floating wireframe shapes
+        const shapes = [];
+        const geos = [
+          new THREE.IcosahedronGeometry(1.8, 0),
+          new THREE.OctahedronGeometry(1.4, 0),
+          new THREE.TetrahedronGeometry(1.2, 0),
+          new THREE.IcosahedronGeometry(2.2, 1),
+          new THREE.OctahedronGeometry(1.0, 0),
+          new THREE.TetrahedronGeometry(1.6, 0),
+        ];
+
+        const isMobile = window.innerWidth < 768;
+        const positions = isMobile
+          ? [
+              [-5, 4, -3],
+              [6, -3, -4],
+              [-4, -5, -2],
+              [5, 5, -5],
+              [-6, 1, -3],
+              [7, 2, -4],
+            ]
+          : [
+              [-12, 8, -5],
+              [14, -6, -8],
+              [-8, -10, -3],
+              [10, 10, -10],
+              [-15, 2, -6],
+              [16, 4, -7],
+            ];
+
+        geos.forEach((geo, i) => {
+          const edges = new THREE.EdgesGeometry(geo);
+          const mat = i % 2 === 0 ? blueMat : goldMat;
+          const line = new THREE.LineSegments(edges, mat);
+          const pos = positions[i];
+          line.position.set(pos[0], pos[1], pos[2]);
+          line.userData = {
+            rotSpeed: {
+              x: (Math.random() - 0.5) * 0.003,
+              y: (Math.random() - 0.5) * 0.004,
+              z: (Math.random() - 0.5) * 0.002,
+            },
+            floatSpeed: 0.2 + Math.random() * 0.3,
+            floatAmp: 0.5 + Math.random() * 1.0,
+            baseY: pos[1],
+          };
+          scene.add(line);
+          shapes.push(line);
+        });
+
+        // Mouse tracking for subtle parallax
+        let mouseX = 0,
+          mouseY = 0;
+        document.addEventListener("mousemove", (e) => {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
+
+        // Scroll-based opacity
+        let scrollY = 0;
+        window.addEventListener("scroll", () => {
+          scrollY = window.scrollY;
+        });
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          const t = Date.now() * 0.001;
+          const fade = Math.max(0, 1 - scrollY / 600);
+
+          shapes.forEach((s) => {
+            s.rotation.x += s.userData.rotSpeed.x;
+            s.rotation.y += s.userData.rotSpeed.y;
+            s.rotation.z += s.userData.rotSpeed.z;
+            s.position.y =
+              s.userData.baseY +
+              Math.sin(t * s.userData.floatSpeed) * s.userData.floatAmp;
+            s.position.x += (mouseX * 1.5 - s.position.x) * 0.002;
+            s.material.opacity =
+              s === shapes[0] || s === shapes[2] || s === shapes[4]
+                ? 0.3 * fade
+                : 0.2 * fade;
+          });
+
+          camera.position.x += (mouseX * 2 - camera.position.x) * 0.02;
+          camera.position.y += (-mouseY * 1.5 - camera.position.y) * 0.02;
+          camera.lookAt(0, 0, 0);
+
+          renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener("resize", () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+      })();
+    </script>
+  </body>
+</html>
