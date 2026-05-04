@@ -5296,9 +5296,10 @@
           document.getElementById(targetId).classList.add("active");
         }
         // Force layout recalculation and scroll
-        requestAnimationFrame(() =>
-          window.scrollTo({ top: 0, behavior: "instant" }),
-        );
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, behavior: "instant" });
+          if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+        });
       }
 
       window.addEventListener("popstate", () => {
