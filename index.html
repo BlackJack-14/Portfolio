@@ -3881,11 +3881,11 @@
         </div>
         <h1 class="art-pg-title">
           How to Fine-Tune LLMs with LoRA: A Practical Guide for AI/ML Students
-          (2025)
+          (2026)
         </h1>
         <div class="art-pg-info">
-          <span>✍️ Rudra Gupta</span>
-          <span>📅 May 1, 2025</span>
+          <span>Rudra Gupta</span>
+          <span>May 1, 2026</span>
           <span>⏱ 10 min read</span>
           <span>🏷 LLM · LoRA · Fine-Tuning · PEFT</span>
         </div>
@@ -3894,336 +3894,192 @@
       <div class="art-pg-body-wrap">
         <div class="art-pg-body">
           <div class="snippet">
-            <div class="snippet-lbl">📌 Quick Answer — Featured Snippet</div>
-            <p>
-              <strong>LoRA (Low-Rank Adaptation) fine-tuning</strong> lets you
-              customize a pre-trained LLM on your own dataset using &lt; 1% of
-              original parameters. The process: (1) load a quantized base model
-              (LLaMA, Mistral, etc.), (2) inject LoRA adapter layers using PEFT,
-              (3) train on your dataset with a small learning rate, (4) merge
-              and export. Free GPU (Google Colab T4) is sufficient for 7B
-              models.
-            </p>
+            <div class="snippet-lbl">📌 Quick Answer — Recommended Article</div>
+            <p></p>
           </div>
-
-          <h2>What is LoRA and Why Does It Matter?</h2>
           <p>
-            Fine-tuning a large language model used to require
-            <strong>80GB+ of GPU VRAM</strong> — far beyond reach for students
-            and independent researchers. LoRA changed that entirely.
+            LoRA (Low-Level Adaptation) allows you to train a pre-trained LLM on
+            your own dataset, with a high standard of <1% training efficiency.
+            By introducing random matrices into the model logic – but disabling
+            seeding – you can train a language with 8 billion object patterns on
+            a single GPU (like Google Colab T4) in a matter of hours. By<br />2025,
+            tools like Unsloth and PEFT will make this process possible even for
+            AI students with limited virtual budgets.
           </p>
           <p>
-            Introduced in the paper
-            <em>"LoRA: Low-Rank Adaptation of Large Language Models"</em> (Hu et
-            al., 2021), LoRA is a
-            <strong>parameter-efficient fine-tuning (PEFT)</strong> technique
-            that injects small trainable matrices into a frozen model. Instead
-            of updating billions of weights, you train only a few million —
-            achieving comparable results at a fraction of the computational
-            cost.
+            When I started studying fundamental language systems at UPES, the
+            idea of
           </p>
           <p>
-            This is exactly what I used to build <strong>Edu-SLM</strong> — a
-            curriculum-aligned LLM fine-tuned on academic content using LoRA on
-            LLaMA 3.1 8B, running on a single GPU.
+            preparing for an LLM seemed overwhelming. Textbooks said you needed
           </p>
-
-          <h2>How LoRA Works: The Core Concept</h2>
-          <h3>The Math (Simplified)</h3>
+          <p>large distributed clusters, A100 GPUs, and days of computation.</p>
+          <h2>Reality? Precise Functional Engineering (PEFT) is making AI</h2>
+          <h2>development mainstream.</h2>
           <p>
-            In a standard transformer, each weight matrix <strong>W</strong> is
-            frozen. LoRA adds two small matrices — <strong>A</strong> and
-            <strong>B</strong> — whose product approximates the weight update:
+            In this tutorial, I will explain the mathematics of LLaMA
+            optimization using LoRA, explain why it works, and guide you through
+            the development of a script to train the first open source
+            framework.
           </p>
-
-          <div class="code-block">
-            <span class="code-comment"
-              ># Standard: W is updated (expensive, billions of params)</span
-            >
-            <span class="code-key">W_new</span> = W + ΔW
-
-            <span class="code-comment"
-              ># LoRA: Only A and B are trained (rank r << d)</span
-            >
-            <span class="code-key">W_new</span> = W +
-            <span class="code-val">B × A</span>
-            <span class="code-comment"># A: (r × d_in), B: (d_out × r)</span>
-            <span class="code-comment"
-              ># Typical r = 8 or 16 → 10x-50x fewer params than full FT</span
-            >
-          </div>
-
+          <h2>Table of Contents</h2>
+          <h2>Problem: Full Optimization in 2025</h2>
+          <h2>What is LoRA Optimization? (Concept)</h2>
+          <h2>Math: Low-Level Analysis</h2>
+          <h2>Modern Aesthetic Style (Face Hugging)</h2>
+          <h2>Dataset Optimization</h2>
+          <h2>Method: LLaMA 3 Optimization</h2>
+          <h2>Frequently Asked Questions (SEO FAQ)</h2>
+          <h2>Problem: Full Optimization in 2025</h2>
           <p>
-            The <strong>rank r</strong> controls the expressiveness vs.
-            efficiency tradeoff. For most fine-tuning tasks, r=8 to r=64 works
-            well.
+            Imagine you have an open source system like LLaMA 3 (8B variables).
+            You want to train a specific skill on your database - for example,
+            translating natural language into SQL queries.
           </p>
-
-          <h3>What Gets Adapted?</h3>
           <p>
-            LoRA is typically applied to the
-            <strong>attention weight matrices</strong> (Q, K, V, and output
-            projection) in transformer layers. The feed-forward layers are
-            usually left frozen, further reducing trainable parameters.
+            A "full optimization" (FFT) involves calculating the rise of the
+            optimizer's behavior for all 8 billion instances. To calculate this:
           </p>
-
-          <h2>Step-by-Step: Fine-Tuning LLaMA 3 with LoRA</h2>
-          <h3>Step 1: Setup Environment</h3>
-          <div class="code-block">
-            <span class="code-key">pip install</span>
-            <span class="code-val"
-              >transformers peft accelerate bitsandbytes datasets trl</span
-            >
-            <span class="code-comment"
-              ># For even faster training, install Unsloth:</span
-            >
-            <span class="code-key">pip install</span>
-            <span class="code-val"
-              >"unsloth[colab-new] @
-              git+https://github.com/unslothai/unsloth.git"</span
-            >
-          </div>
-
-          <h3>Step 2: Load Base Model in 4-bit</h3>
-          <div class="code-block">
-            <span class="code-key">from</span> transformers
-            <span class="code-key">import</span> AutoModelForCausalLM,
-            BitsAndBytesConfig <span class="code-key">import</span> torch
-            bnb_config = BitsAndBytesConfig( load_in_4bit=<span class="code-val"
-              >True</span
-            >, bnb_4bit_quant_type=<span class="code-val">"nf4"</span>,
-            bnb_4bit_compute_dtype=torch.float16, ) model =
-            AutoModelForCausalLM.from_pretrained(
-            <span class="code-val">"meta-llama/Meta-Llama-3.1-8B-Instruct"</span
-            >, quantization_config=bnb_config, device_map=<span class="code-val"
-              >"auto"</span
-            >, )
-          </div>
-
-          <h3>Step 3: Inject LoRA Adapters</h3>
-          <div class="code-block">
-            <span class="code-key">from</span> peft
-            <span class="code-key">import</span> LoraConfig, get_peft_model
-            lora_config = LoraConfig( r=<span class="code-val">16</span>,
-            <span class="code-comment"># rank</span> lora_alpha=<span
-              class="code-val"
-              >32</span
-            >,
-            <span class="code-comment"># scaling factor</span>
-            target_modules=[<span class="code-val">"q_proj"</span>,
-            <span class="code-val">"v_proj"</span>], lora_dropout=<span
-              class="code-val"
-              >0.05</span
-            >, bias=<span class="code-val">"none"</span>, task_type=<span
-              class="code-val"
-              >"CAUSAL_LM"</span
-            >, ) model = get_peft_model(model, lora_config)
-            model.print_trainable_parameters()
-            <span class="code-comment"
-              ># trainable params: 4,194,304 || all params: 8,034,795,520</span
-            >
-            <span class="code-comment"
-              ># → Only 0.05% of parameters are trained!</span
-            >
-          </div>
-
-          <h3>Step 4: Prepare Your Dataset</h3>
           <p>
-            Format your data as instruction-response pairs. For Edu-SLM, I used
-            curriculum-aligned QA pairs extracted from textbooks and structured
-            as chat templates:
+            Model weight (bf16/fp16): ~16 GB video memory<br />Modifications:
+            ~16 GB video memory<br />Optimization state (AdamW): ~32 GB video
+            memory
           </p>
-          <div class="code-block">
-            dataset_format = {
-            <span class="code-val">"instruction"</span>:
-            <span class="code-val"
-              >"Explain the concept of gradient descent."</span
-            >, <span class="code-val">"response"</span>:
-            <span class="code-val"
-              >"Gradient descent is an optimization algorithm..."</span
-            >
-            }
-          </div>
-
-          <h3>Step 5: Train with SFTTrainer</h3>
-          <div class="code-block">
-            <span class="code-key">from</span> trl
-            <span class="code-key">import</span> SFTTrainer
-            <span class="code-key">from</span> transformers
-            <span class="code-key">import</span> TrainingArguments trainer =
-            SFTTrainer( model=model, train_dataset=dataset,
-            args=TrainingArguments( output_dir=<span class="code-val"
-              >"./lora-output"</span
-            >, per_device_train_batch_size=<span class="code-val">2</span>,
-            gradient_accumulation_steps=<span class="code-val">4</span>,
-            learning_rate=<span class="code-val">2e-4</span>,
-            num_train_epochs=<span class="code-val">3</span>, fp16=<span
-              class="code-val"
-              >True</span
-            >, ), ) trainer.train()
-          </div>
-
-          <h2>LoRA Hyperparameters — What Actually Matters</h2>
-          <ul>
-            <li>
-              <strong>Rank (r):</strong> Higher rank = more capacity but more
-              memory. Start with r=8 or r=16.
-            </li>
-            <li>
-              <strong>Alpha:</strong> Keep alpha = 2× rank as a rule of thumb
-              (e.g., r=16, alpha=32).
-            </li>
-            <li>
-              <strong>Target modules:</strong> q_proj and v_proj is standard.
-              Add k_proj and o_proj for stronger adaptation.
-            </li>
-            <li>
-              <strong>Learning rate:</strong> 1e-4 to 3e-4 works well for most
-              tasks. Too high causes instability.
-            </li>
-            <li>
-              <strong>Epochs:</strong> 1–3 epochs usually sufficient. More can
-              cause overfitting.
-            </li>
-          </ul>
-
-          <h2>Combining LoRA with RAG (My Approach in Edu-SLM)</h2>
+          <h2>Throughput/cluster size: ~10 GB video memory</h2>
           <p>
-            Fine-tuning alone has limitations — the model can still hallucinate
-            or give outdated answers. In Edu-SLM, I combined LoRA with
-            <strong>Retrieval-Augmented Generation (RAG)</strong>:
+            You need at least 80 GB video memory. An 80 GB A100 GPU costs about
+            $2-3 per hour. This is a hurdle for machine learning students.
           </p>
-          <ul>
-            <li>
-              Textbook content is chunked and embedded into a
-              <strong>FAISS vector index</strong>
-            </li>
-            <li>
-              At inference time, the query retrieves top-k relevant chunks
-            </li>
-            <li>
-              Retrieved context is injected into the prompt before the
-              fine-tuned model generates a response
-            </li>
-            <li>
-              This gives both <strong>domain-specific style</strong> (from LoRA)
-              and <strong>factual grounding</strong> (from RAG)
-            </li>
-          </ul>
-
-          <!-- Internal link CTA to Article 2 -->
-          <div class="int-cta">
-            <p>
-              Wondering when to use RAG vs fine-tuning for your project? Read my
-              deep-dive:
-              <strong>RAG vs Fine-Tuning: Which Should You Choose?</strong>
-            </p>
-            <a
-              onclick="showArticle('a2')"
-              href="#a2"
-              class="btn-primary"
-              style="font-size: 0.75rem; padding: 0.75rem 1.5rem"
-              >Read Article 2 →</a
-            >
-          </div>
-
-          <h2>Frequently Asked Questions</h2>
-          <div class="faq">
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                <span>What is LoRA fine-tuning for LLMs?</span
-                ><span class="faq-toggle">+</span>
-              </button>
-              <div class="faq-a">
-                <p>
-                  LoRA (Low-Rank Adaptation) is a parameter-efficient
-                  fine-tuning technique that injects trainable low-rank matrices
-                  into a frozen pre-trained model. Instead of updating all model
-                  weights, LoRA only trains a small number of additional
-                  parameters, reducing GPU memory requirements by up to 10x
-                  while achieving comparable performance to full fine-tuning.
-                </p>
-              </div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                <span>Can I fine-tune an LLM for free?</span
-                ><span class="faq-toggle">+</span>
-              </button>
-              <div class="faq-a">
-                <p>
-                  Yes. Google Colab or Kaggle Notebooks offer free T4/P100 GPUs
-                  sufficient for LoRA fine-tuning of 7B models in 4-bit
-                  quantization. Tools like Unsloth further reduce memory usage,
-                  making it possible to fine-tune LLaMA 3 8B on a single free
-                  GPU in under 2 hours.
-                </p>
-              </div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                <span
-                  >What's the difference between LoRA and full
-                  fine-tuning?</span
-                ><span class="faq-toggle">+</span>
-              </button>
-              <div class="faq-a">
-                <p>
-                  Full fine-tuning updates all model parameters (billions of
-                  weights), requiring massive GPU memory and risking
-                  catastrophic forgetting. LoRA freezes the original weights and
-                  only trains small rank-decomposition matrices (&lt; 1% of
-                  total parameters), making it 10–50x more memory-efficient
-                  while preserving the base model's general capabilities.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            style="
-              margin-top: 3rem;
-              padding-top: 2rem;
-              border-top: 1px solid var(--border2);
-              display: flex;
-              gap: 2rem;
-              flex-wrap: wrap;
-            "
-          >
-            <a
-              onclick="showMain()"
-              href="#home"
-              style="
-                font-family: var(--font-m);
-                font-size: 0.78rem;
-                color: var(--accent);
-                text-decoration: none;
-              "
-              >← Back to Portfolio</a
-            >
-            <a
-              href="https://linkedin.com/in/rudra-gupta"
-              target="_blank"
-              style="
-                font-family: var(--font-m);
-                font-size: 0.78rem;
-                color: var(--muted);
-                text-decoration: none;
-              "
-              >Connect on LinkedIn ↗</a
-            >
-            <a
-              href="https://github.com/BlackJack-14"
-              target="_blank"
-              style="
-                font-family: var(--font-m);
-                font-size: 0.78rem;
-                color: var(--muted);
-                text-decoration: none;
-              "
-              >GitHub ↗</a
-            >
-          </div>
+          <h2>What is LoRA optimization? (Concept)</h2>
+          <p>
+            LoRA (Low-order Adaptation) introduced by Hu et al. (Microsoft
+            Research)
+          </p>
+          <p>
+            has chosen a sensible path. Since the initial examples are already
+          </p>
+          <p>
+            fulfilled with other standards, the "new" requirements for learning
+            new skills in the initial inner region
+          </p>
+          <h2>are lower.</h2>
+          <p>
+            Instead of changing the original algorithm, LoRA does the following:
+          </p>
+          <p>Disables all initial weights of the previously trained model.</p>
+          <p>
+            Injects a small trainable decomposition with attention variables
+            (usually query variable/attention value).
+          </p>
+          <h2>You just trained this input matrix.</h2>
+          <p>
+            Feedback? You trained 10 million variables instead of 8 billion. The
+            video memory requirements have decreased from 80 GB to about 8 GB,
+            which is very close to the Free Colab GPU.
+          </p>
+          <p>
+            Math: Low-level decomposition<br />Let's consider a formal
+            progression:
+          </p>
+          <h2>h = W₀x</h2>
+          <h2>where W₀ is the trained weight</h2>
+          <h2>d × k.</h2>
+          <h2>In LoRA, we represent the adaptive weight ΔW by dividing</h2>
+          <h2>into two subsets, A and B:</h2>
+          <h2>ΔW = BA</h2>
+          <h2>where:</h2>
+          <h2>The size of B is d × r</h2>
+          <h2>The ratio of A is r × k</h2>
+          <h2>r is the rank (i.e. 8, 16, 32). These</h2>
+          <h2>are the selected supervariables.</h2>
+          <h2>This step is:</h2>
+          <h2>h = W₀x + BAx</h2>
+          <h2>After a while, to get an idea,</h2>
+          <p>
+            you can add the fractions together: W_new = W₀ + BA. This is called
+          </p>
+          <h2>a "batch".</h2>
+          <h2>Modern scheduling method</h2>
+          <p>
+            In 2025, you won't have to write a course from scratch. ML engineers
+          </p>
+          <h2>Here, to optimize LLM, they use:</h2>
+          <p>
+            Hug FaceTransformation: the first architecture for model libraries
+          </p>
+          <p>.<br />PEFT: a library for parsing and injecting LoRA adapters.</p>
+          <h2>TRL (Transformer Reinforcement Learning): handles SFT</h2>
+          <h2>(controlled precision retention) and retention.</h2>
+          <h2>BitsAndBytes: handles 4-bit and 8-bit quantization (QLoRA)</h2>
+          <h2>for loading models into VRAM.</h2>
+          <p>
+            Unsloth: An optimized front-end framework that speeds up LoRA
+            learning
+          </p>
+          <h2>by up to 2x the read step and saves memory.</h2>
+          <h2>Dataset setup</h2>
+          <p>Supervised replication requires that your data be replicated</p>
+          <p>
+            in a learning state of "when to stop talking". The most common
+            ChatML format is:
+          </p>
+          <p>
+            &lt;|im_start|&gt;user<br />Write a SQL query to find users over 30
+            years old.&lt;|im_end|&gt;<br />&lt;|im_start|&gt;helper<br />SELECT
+            * FROM operator WHERE years >gt; 30;&lt;|im_end|&gt;
+          </p>
+          <p>
+            Method: LLaMA 3 Optimization<br />Here is a script that shows how
+            simple this API is:
+          </p>
+          <p>Import FastLanguageModel from unsloth<br />Install torch</p>
+          <p>
+            max_seq_length = 2048<br />model, tokenizer =
+            FastLanguageModel.from_pretrained(<br />model_name =
+            "unsloth/llama-3-8b-bnb-4bit",<br />max_seq_length =
+            max_seq_length,<br />load_in_4bit = True,<br />))
+          </p>
+          <p>
+            # LoRA metric implementation.<br />model =
+            FastLanguageModel.get_peft_model(<br />model,<br />r = 16, #
+            low-level matrix levels.<br />target_modules = ["q_proz", "k_proz",
+            "v_proz", "o_proz",<br />"get_proz", "up_proz", "down_proz"],<br />lora_alpha
+            = 16, 3.<br />lora_dropout = 0 , 0 .<br />bias = "nothing",<br />use_gradient_checkpointing
+            = "unsloth",<br />)
+          </p>
+          <p>
+            # ... (configure the trainer with the TRL SFTTrainer, pass the
+            ChatML dataset, and call trainer.train()))
+          </p>
+          <h2>Lora Tuning FAQs.</h2>
+          <h2>What is the difference between LoRA and QLoRA?</h2>
+          <p>
+            LoRA optimizes low-level variables, but keeps the original model
+            fixed at full precision (16 bits). QLoRA (Quantized LoRA) goes one
+            step further by quantizing the base model to 4-bit precision. QLoRA
+            significantly reduces memory requirements and is becoming the
+            standard for consumer graphics cards.
+          </p>
+          <h2>What value should I set for my LoRA rank (r)?</h2>
+          <p>
+            A higher r value means more trainable variables, capable of learning
+            more complex tasks, but more expensive in terms of memory and
+            computing power. For simple brightness variations, r=8 is often
+            enough. For complex logic (like programming or deep learning) r=32
+            or r=64 is better.
+          </p>
+          <h2>Can LoRA cause catastrophic forgetting?</h2>
+          <p>
+            Because LoRA tightly locks the base model, the possibility of
+            catastrophic forgetting is much greater than with complete
+            fine-tuning. However, when trained on very specific data over a long
+            period of time, adapters can overfit and produce unintelligible
+            results when this narrow domain constraint is removed.
+          </p>
+          <p>
+            Have questions about this guide? Contact me on LinkedIn or visit my
+            GitHub profile.
+          </p>
         </div>
       </div>
     </div>
@@ -4235,368 +4091,99 @@
      Intent: Informational + Commercial
 ════════════════════════════════════════ -->
     <div id="a2" class="article-page">
-      <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": "RAG vs Fine-Tuning: Which Should You Choose for Your AI Application in 2025?",
-          "description": "A technical comparison of Retrieval-Augmented Generation (RAG) and LLM fine-tuning — with decision criteria, cost analysis, and when to combine both.",
-          "author": { "@type": "Person", "name": "Rudra Gupta" },
-          "datePublished": "2025-04-15",
-          "keywords": [
-            "RAG vs fine-tuning",
-            "retrieval augmented generation vs fine-tuning",
-            "when to use RAG",
-            "when to fine-tune LLM",
-            "RAG fine-tuning comparison 2025",
-            "LLM customization methods"
-          ]
-        }
-      </script>
-      <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "When should I use RAG instead of fine-tuning?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Use RAG when your application needs access to dynamic, frequently updated information; when you need to cite sources; when you have a large, searchable knowledge base; or when you want to avoid expensive retraining. RAG is faster to deploy and easier to update — you just add documents to the vector store."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is RAG better than fine-tuning for LLMs?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Neither is universally better — they solve different problems. RAG excels at providing up-to-date, retrievable knowledge. Fine-tuning excels at changing the model's behavior, style, reasoning patterns, or domain-specific language. For most production AI applications, combining both (RAG + LoRA) delivers the best results."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the cost difference between RAG and fine-tuning?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "RAG has negligible upfront cost — you just build a vector database. Fine-tuning requires GPU compute (1-10 hours for LoRA on a 7B model) but is a one-time cost. At inference time, RAG adds latency from retrieval. Fine-tuned models are self-contained but require retraining when knowledge updates."
-              }
-            }
-          ]
-        }
-      </script>
-
-      <div class="art-pg-header">
-        <div class="art-breadcrumb">
-          <a href="#home" onclick="showMain()">Home</a> →
-          <a
-            href="#articles"
-            onclick="
-              showMain();
-              setTimeout(
-                () => document.getElementById('articles').scrollIntoView(),
-                100,
-              );
-            "
-            >Articles</a
-          >
-          → RAG vs Fine-Tuning
-        </div>
-        <h1 class="art-pg-title">
-          RAG vs Fine-Tuning: Which Should You Choose for Your AI Application in
-          2025?
-        </h1>
-        <div class="art-pg-info">
-          <span>✍️ Rudra Gupta</span>
-          <span>📅 April 15, 2025</span>
-          <span>⏱ 12 min read</span>
-          <span>🏷 RAG · Fine-Tuning · LLM Architecture · AI Design</span>
-        </div>
+      <div class="art-breadcrumb">
+        <a href="#home">Home</a> →
+        <a href="#articles">Articles</a>
+        → LoRA Fine-Tuning
       </div>
 
-      <div class="art-pg-body-wrap">
-        <div class="art-pg-body">
-          <div class="snippet">
-            <div class="snippet-lbl">📌 Quick Answer — Featured Snippet</div>
-            <p>
-              <strong>RAG vs Fine-Tuning at a glance:</strong> Use
-              <strong>RAG</strong> when you need dynamic knowledge access,
-              source citations, or frequent updates. Use
-              <strong>fine-tuning</strong> when you need the model to behave
-              differently, adopt a new tone/format, or learn domain-specific
-              reasoning. Use <strong>both together</strong> for production AI
-              applications that need grounded, specialized responses — as in
-              Edu-SLM.
-            </p>
-          </div>
+      <h1 class="art-pg-title">
+        How to Fine-Tune LLMs with LoRA (with Code Examples)
+      </h1>
 
-          <h2>The Core Problem: LLMs Have Knowledge Gaps</h2>
+      <div class="art-pg-info">
+        <span>Rudra Gupta</span>
+        <span>April 1, 2026</span>
+        <span>⏱ 10 min read</span>
+        <span>🏷 LoRA · PEFT · LLaMA 3 · Fine-Tuning · LLM Architecture</span>
+      </div>
+
+      <div class="art-pg-body">
+        <div class="snippet">
+          <div class="snippet-lbl">📌 Quick Answer — Featured Snippet</div>
           <p>
-            Every LLM has a training cutoff and knows nothing about your private
-            documents, your company's internal data, or specialized domain
-            knowledge you've accumulated. To bridge this gap, developers have
-            two primary approaches:
+            <strong>LoRA at a glance:</strong> LoRA (Low-Rank Adaptation) lets
+            you fine-tune a large language model by training only a tiny set of
+            injected weight matrices — as few as
+            <strong>0.05% of total parameters</strong>
+            — while the base model stays frozen.
           </p>
-          <ul>
-            <li>
-              <strong>Retrieval-Augmented Generation (RAG):</strong> Give the
-              model access to external documents at inference time
-            </li>
-            <li>
-              <strong>Fine-tuning:</strong> Bake new knowledge and behavior
-              directly into the model weights
-            </li>
-          </ul>
+        </div>
+
+        <h2>What is LoRA and Why Does It Matter?</h2>
+        <p>
+          Fine-tuning a large language model used to require massive GPU
+          resources. LoRA solves this by enabling parameter-efficient
+          fine-tuning.
+        </p>
+
+        <h2>How LoRA Works</h2>
+        <div class="code-block">W_new = W + B × A</div>
+
+        <h2>Step-by-Step Fine-Tuning</h2>
+
+        <h3>Step 1: Setup</h3>
+        <div class="code-block">
+          pip install transformers peft accelerate bitsandbytes datasets trl
+        </div>
+
+        <h3>Step 2: Load Model</h3>
+        <div class="code-block">
+          from transformers import AutoModelForCausalLM
+        </div>
+
+        <h3>Step 3: Apply LoRA</h3>
+        <div class="code-block">from peft import LoraConfig</div>
+
+        <h3>Step 4: Train</h3>
+        <div class="code-block">trainer.train()</div>
+
+        <h2>Hyperparameters</h2>
+        <table class="param-table">
+          <tr>
+            <th>Parameter</th>
+            <th>Range</th>
+          </tr>
+          <tr>
+            <td>r</td>
+            <td>8–64</td>
+          </tr>
+          <tr>
+            <td>learning_rate</td>
+            <td>1e-4 – 3e-4</td>
+          </tr>
+        </table>
+
+        <h2>Combining LoRA with RAG</h2>
+        <p>
+          Combine LoRA with RAG to achieve both stylistic control and factual
+          grounding.
+        </p>
+
+        <div class="int-cta">
+          <a href="#a2" class="btn-primary">Read Article 2 →</a>
+        </div>
+
+        <h2>FAQ</h2>
+
+        <div class="faq-item">
           <p>
-            The question isn't which is "better" — it's which fits your problem.
-            Both have entirely different tradeoffs.
+            <strong>What rank should I use?</strong> Start with r=8 or r=16.
           </p>
+        </div>
 
-          <h2>What is RAG? How It Works</h2>
-          <h3>The RAG Pipeline</h3>
-          <p>RAG follows a <strong>retrieve-then-generate</strong> pattern:</p>
-          <ul>
-            <li>
-              <strong>Indexing:</strong> Your documents are chunked and embedded
-              into a vector database (FAISS, Chroma, Pinecone)
-            </li>
-            <li>
-              <strong>Retrieval:</strong> At query time, the top-k most
-              semantically similar chunks are retrieved
-            </li>
-            <li>
-              <strong>Augmentation:</strong> Retrieved chunks are injected into
-              the prompt as context
-            </li>
-            <li>
-              <strong>Generation:</strong> The LLM generates a response grounded
-              in the provided context
-            </li>
-          </ul>
-          <p>
-            I implemented this architecture in <strong>TheGeetaWay</strong> —
-            using FAISS + Sentence-Transformers to retrieve relevant Bhagavad
-            Gita verses, then feeding them to Llama 3 for context-aware
-            responses. The model never needed fine-tuning because the knowledge
-            was fully contained in the retrieval index.
-          </p>
-
-          <h3>When RAG Shines</h3>
-          <ul>
-            <li>
-              Knowledge that changes frequently (news, research papers, product
-              catalogs)
-            </li>
-            <li>
-              Applications requiring <strong>source citations</strong> and
-              verifiable answers
-            </li>
-            <li>Large, searchable document corpora (&gt; 10k documents)</li>
-            <li>When you want <strong>zero GPU training cost</strong></li>
-            <li>
-              When updating knowledge should happen instantly (just add to
-              vector store)
-            </li>
-          </ul>
-
-          <h2>What is Fine-Tuning? How It Works</h2>
-          <h3>The Fine-Tuning Paradigm</h3>
-          <p>
-            Fine-tuning <strong>modifies the model's weights</strong> by
-            training on a task-specific dataset. With LoRA (see my
-            <a onclick="showArticle('a1')" href="#a1">LoRA fine-tuning guide</a
-            >), this process is memory-efficient and fast.
-          </p>
-          <p>
-            Unlike RAG, the knowledge is
-            <strong>baked into the model parameters</strong> — no external
-            retrieval step at inference. The model itself becomes the expert.
-          </p>
-
-          <h3>When Fine-Tuning Shines</h3>
-          <ul>
-            <li>
-              Teaching the model a <strong>new output format</strong> (JSON,
-              code, tables)
-            </li>
-            <li>
-              Changing <strong>response style or tone</strong> (formal,
-              clinical, conversational)
-            </li>
-            <li>
-              Teaching domain-specific
-              <strong>reasoning patterns</strong> (medical diagnosis, legal
-              interpretation)
-            </li>
-            <li>
-              Improving performance on a narrow,
-              <strong>well-defined task</strong>
-            </li>
-            <li>When inference speed matters (no retrieval latency)</li>
-          </ul>
-
-          <h2>Head-to-Head Comparison</h2>
-
-          <div class="code-block">
-            ┌─────────────────────┬──────────────────────┬──────────────────────┐
-            │ Criterion │ RAG │ Fine-Tuning (LoRA) │
-            ├─────────────────────┼──────────────────────┼──────────────────────┤
-            │ Setup time │ Hours │ Days │ │ GPU cost │ Minimal │ Moderate (free
-            tier) │ │ Knowledge update │ Instant │ Retrain required │ │ Source
-            citation │ Native │ Not built-in │ │ Behavior change │ Limited │
-            Strong │ │ Style adaptation │ Prompt-only │ Deep │ │ Hallucination
-            risk │ Lower (grounded) │ Higher │ │ Inference speed │ Slower
-            (retrieval) │ Faster │
-            └─────────────────────┴──────────────────────┴──────────────────────┘
-          </div>
-
-          <h2>The Best of Both: RAG + Fine-Tuning Together</h2>
-          <p>
-            In my <strong>Edu-SLM project</strong>, I combined both — and this
-            hybrid approach is increasingly what production AI systems use:
-          </p>
-          <ul>
-            <li>
-              <strong>LoRA fine-tuning</strong> taught the model academic
-              response style, structured explanation format, and educational
-              reasoning patterns
-            </li>
-            <li>
-              <strong>RAG</strong> provided real-time retrieval of
-              curriculum-specific content from a FAISS-indexed textbook corpus
-            </li>
-            <li>
-              Result: A model that
-              <strong>responds like an educator</strong> and
-              <strong>answers from verified sources</strong>
-            </li>
-          </ul>
-          <p>
-            This combination is sometimes called
-            <strong>"fine-tuned RAG"</strong> or
-            <strong>"grounded fine-tuning"</strong> and represents the current
-            state-of-the-art for domain-specific LLM applications.
-          </p>
-
-          <h2>Decision Framework: Which Should You Choose?</h2>
-          <p>Ask yourself these three questions:</p>
-          <ul>
-            <li>
-              <strong>"Does my knowledge change frequently?"</strong> → Yes: use
-              RAG. No: consider fine-tuning.
-            </li>
-            <li>
-              <strong>"Do I need to change how the model behaves?"</strong> →
-              Yes: fine-tuning. No: RAG + prompt engineering.
-            </li>
-            <li>
-              <strong>"Do I have GPU resources?"</strong> → No: RAG only. Yes:
-              evaluate fine-tuning.
-            </li>
-          </ul>
-
-          <!-- Internal CTA back to Article 1 -->
-          <div class="int-cta">
-            <p>
-              Ready to implement LoRA? Read the hands-on guide:
-              <strong
-                >How to Fine-Tune LLMs with LoRA (with code examples)</strong
-              >.
-            </p>
-            <a
-              onclick="showArticle('a1')"
-              href="#a1"
-              class="btn-primary"
-              style="font-size: 0.75rem; padding: 0.75rem 1.5rem"
-              >Read Article 1 →</a
-            >
-          </div>
-
-          <h2>Frequently Asked Questions</h2>
-          <div class="faq">
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                <span>When should I use RAG instead of fine-tuning?</span
-                ><span class="faq-toggle">+</span>
-              </button>
-              <div class="faq-a">
-                <p>
-                  Use RAG when your application needs access to dynamic,
-                  frequently updated information; when you need to cite sources;
-                  when you have a large, searchable knowledge base; or when you
-                  want to avoid expensive retraining. RAG is faster to deploy
-                  and easier to update — you just add documents to the vector
-                  store.
-                </p>
-              </div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                <span>Is RAG better than fine-tuning for LLMs?</span
-                ><span class="faq-toggle">+</span>
-              </button>
-              <div class="faq-a">
-                <p>
-                  Neither is universally better — they solve different problems.
-                  RAG excels at providing up-to-date, retrievable knowledge.
-                  Fine-tuning excels at changing the model's behavior, style,
-                  and reasoning patterns. For most production AI applications,
-                  combining both delivers the best results.
-                </p>
-              </div>
-            </div>
-            <div class="faq-item">
-              <button class="faq-q" onclick="toggleFaq(this)">
-                <span
-                  >What is the cost difference between RAG and
-                  fine-tuning?</span
-                ><span class="faq-toggle">+</span>
-              </button>
-              <div class="faq-a">
-                <p>
-                  RAG has negligible upfront cost — you just build a vector
-                  database. Fine-tuning requires GPU compute (1–10 hours for
-                  LoRA on a 7B model) but is a one-time cost. At inference time,
-                  RAG adds latency from retrieval. Fine-tuned models are
-                  self-contained but require retraining when knowledge updates.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div
-            style="
-              margin-top: 3rem;
-              padding-top: 2rem;
-              border-top: 1px solid var(--border2);
-              display: flex;
-              gap: 2rem;
-              flex-wrap: wrap;
-            "
-          >
-            <a
-              onclick="showMain()"
-              href="#home"
-              style="
-                font-family: var(--font-m);
-                font-size: 0.78rem;
-                color: var(--accent);
-                text-decoration: none;
-              "
-              >← Back to Portfolio</a
-            >
-            <a
-              href="https://github.com/BlackJack-14"
-              target="_blank"
-              style="
-                font-family: var(--font-m);
-                font-size: 0.78rem;
-                color: var(--muted);
-                text-decoration: none;
-              "
-              >See My Projects on GitHub ↗</a
-            >
-          </div>
+        <div class="faq-item">
+          <p><strong>How much GPU memory?</strong> 12–16 GB with QLoRA.</p>
         </div>
       </div>
     </div>
