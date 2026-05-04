@@ -108,12 +108,51 @@
         font-size: 16px;
       }
 
+      /* Firefox */
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent-dim) var(--void);
+      }
+
       body {
         background: var(--void);
         color: var(--text);
         font-family: var(--font-d);
         line-height: 1.7;
         overflow-x: hidden;
+      }
+
+      /* ─── CUSTOM SCROLLBAR ─── */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--void);
+        border-left: 1px solid var(--border2);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(
+          180deg,
+          var(--accent) 0%,
+          var(--accent-dim) 50%,
+          var(--accent-warm-dim) 100%
+        );
+        border-radius: 3px;
+        box-shadow: 0 0 8px rgba(91, 156, 245, 0.35);
+        transition: background 0.3s;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(
+          180deg,
+          #7ab3f8 0%,
+          var(--accent) 50%,
+          var(--accent-warm) 100%
+        );
+        box-shadow: 0 0 12px rgba(91, 156, 245, 0.55);
+      }
+      ::-webkit-scrollbar-corner {
+        background: var(--void);
       }
 
       /* ─── CUSTOM CURSOR (mouse only) ─── */
@@ -1285,10 +1324,18 @@
         transform: translateY(-4px);
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
       }
-      .c-link-email:hover { border-color: #e8915a; }
-      .c-link-linkedin:hover { border-color: #0a66c2; }
-      .c-link-github:hover { border-color: #f0eeeb; }
-      .c-link-phone:hover { border-color: #00ff41; }
+      .c-link-email:hover {
+        border-color: #e8915a;
+      }
+      .c-link-linkedin:hover {
+        border-color: #0a66c2;
+      }
+      .c-link-github:hover {
+        border-color: #f0eeeb;
+      }
+      .c-link-phone:hover {
+        border-color: #00ff41;
+      }
       .c-link-icon {
         width: 44px;
         height: 44px;
@@ -3632,8 +3679,11 @@
               wants to chat about building intelligent systems — reach out.
             </p>
             <div class="contact-links">
-              <a href="mailto:rudragupta0123@gmail.com" class="c-link c-link-email">
-                <div class="c-link-icon" style="color:#e8915a">
+              <a
+                href="mailto:rudragupta0123@gmail.com"
+                class="c-link c-link-email"
+              >
+                <div class="c-link-icon" style="color: #e8915a">
                   <svg
                     width="20"
                     height="20"
@@ -3686,7 +3736,7 @@
                 target="_blank"
                 class="c-link c-link-github"
               >
-                <div class="c-link-icon" style="color:#f0eeeb">
+                <div class="c-link-icon" style="color: #f0eeeb">
                   <svg
                     width="20"
                     height="20"
@@ -5825,103 +5875,3 @@
     </script>
   </body>
 </html>
-<!-- Commit 001: Add retry logic -->
-<!-- Commit 002: Add experience cards with details -->
-<!-- Commit 003: Add honesty -->
-<!-- Commit 004: Implement consent management -->
-<!-- Commit 005: Add canonical URLs -->
-<!-- Commit 006: Add honesty -->
-<!-- Commit 007: Create team building -->
-<!-- Commit 008: Add security testing -->
-<!-- Commit 009: Create privacy reporting -->
-<!-- Commit 010: Create career growth -->
-<!-- Commit 011: Create change -->
-<!-- Commit 012: Implement glassmorphism effects -->
-<!-- Commit 013: Add stagger animations -->
-<!-- Commit 014: Implement filter system -->
-<!-- Commit 015: Add access control -->
-<!-- Commit 016: Add knowledge sharing -->
-<!-- Commit 017: Add certificate management -->
-<!-- Commit 018: Create database indexing -->
-<!-- Commit 019: Create print styles -->
-<!-- Commit 020: Implement continuous improvement -->
-<!-- Commit 021: Implement feature flags -->
-<!-- Commit 022: Add resilience -->
-<!-- Commit 023: Add scroll-based animations -->
-<!-- Commit 024: Implement color scheme detection -->
-<!-- Commit 025: Implement footer responsive layout -->
-<!-- Commit 026: Add knowledge sharing -->
-<!-- Commit 027: Add exponential revolution -->
-<!-- Commit 028: Add data governance -->
-<!-- Commit 029: Add snapshot testing -->
-<!-- Commit 030: Create generosity -->
-<!-- Commit 031: Add CORS configuration -->
-<!-- Commit 032: Implement security culture -->
-<!-- Commit 033: Add influence -->
-<!-- Commit 034: Implement hover transitions -->
-<!-- Commit 035: Add authorization -->
-<!-- Commit 036: Style experience bullet points -->
-<!-- Commit 037: Create about section layout -->
-<!-- Commit 038: Create serverless functions -->
-<!-- Commit 039: Create database indexing -->
-<!-- Commit 040: Add knowledge sharing -->
-<!-- Commit 041: Implement srcset attributes -->
-<!-- Commit 042: Add image optimization -->
-<!-- Commit 043: Add breadcrumb navigation -->
-<!-- Commit 044: Create CDN integration -->
-<!-- Commit 045: Create clean architecture -->
-<!-- Commit 046: Create API documentation -->
-<!-- Commit 047: Add security testing -->
-<!-- Commit 048: Create ethical AI -->
-<!-- Commit 049: Create patience -->
-<!-- Commit 050: Implement version control -->
-<!-- Commit 051: Add image optimization -->
-<!-- Commit 052: Add humility -->
-<!-- Commit 053: Create tooltip components -->
-<!-- Commit 054: Add privacy monitoring -->
-<!-- Commit 055: Implement belonging -->
-<!-- Commit 056: Style experience bullet points -->
-<!-- Commit 057: Add penetration testing -->
-<!-- Commit 058: Create generosity -->
-<!-- Commit 059: Create migration system -->
-<!-- Commit 060: Implement smooth scroll -->
-<!-- Commit 061: Implement glassmorphism effects -->
-<!-- Commit 062: Create serverless functions -->
-<!-- Commit 063: Add color system variables -->
-<!-- Commit 064: Add privacy by default -->
-<!-- Commit 065: Implement continuous improvement -->
-<!-- Commit 066: Create Open Graph tags -->
-<!-- Commit 067: Add privacy culture -->
-<!-- Commit 068: Create minification -->
-<!-- Commit 069: Create scale animations -->
-<!-- Commit 070: Implement innovation -->
-<!-- Commit 071: Implement custom cursor effects -->
-<!-- Commit 072: Implement skeleton screens -->
-<!-- Commit 073: Add meta tags for SEO optimization -->
-<!-- Commit 074: Create fairness -->
-<!-- Commit 075: Implement documentation -->
-<!-- Commit 076: Implement error tracking -->
-<!-- Commit 077: Add tree shaking -->
-<!-- Commit 078: Style experience bullet points -->
-<!-- Commit 079: Implement integrity -->
-<!-- Commit 080: Add particle background animation -->
-<!-- Commit 081: Create fulfillment -->
-<!-- Commit 082: Implement consent management -->
-<!-- Commit 083: Create about section layout -->
-<!-- Commit 084: Add edge computing -->
-<!-- Commit 085: Implement self-belief -->
-<!-- Commit 086: Create theme switching -->
-<!-- Commit 087: Add privacy by default -->
-<!-- Commit 088: Add pair programming -->
-<!-- Commit 089: Add penetration testing -->
-<!-- Commit 090: Create knowledge base -->
-<!-- Commit 091: Add meta tags for SEO optimization -->
-<!-- Commit 092: Implement robots.txt -->
-<!-- Commit 093: Create tooltip components -->
-<!-- Commit 094: Create generosity -->
-<!-- Commit 095: Create responsive images -->
-<!-- Commit 096: Create confidence -->
-<!-- Commit 097: Implement request validation -->
-<!-- Commit 098: Create bundle analysis -->
-<!-- Commit 099: Implement risk assessment -->
-<!-- Commit 100: Add gradient backgrounds -->
