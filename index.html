@@ -5237,22 +5237,23 @@
 
       // ─── PAGE ROUTING & HISTORY API ───
       function getRootPath() {
-        if (window.location.protocol === "file:") return window.location.pathname;
+        if (window.location.protocol === "file:")
+          return window.location.pathname;
         const path = window.location.pathname;
         if (path.includes("/article/")) {
           return path.split("/article/")[0] || "/";
         }
         return path.replace(/\/$/, "") || "/";
       }
-      
+
       const rootPath = getRootPath();
       const basePath = rootPath === "/" ? "" : rootPath;
-      
+
       const routes = {
         [rootPath]: "main-site",
         [rootPath + "/"]: "main-site",
         [basePath + "/article/lora-fine-tuning"]: "a1",
-        [basePath + "/article/rag-vs-fine-tuning"]: "a2"
+        [basePath + "/article/rag-vs-fine-tuning"]: "a2",
       };
 
       function getSlug(id) {
@@ -5265,9 +5266,15 @@
       function updateURL(slug) {
         if (window.location.pathname !== slug) {
           try {
-            window.history.pushState({ path: slug }, "", window.location.origin + slug);
+            window.history.pushState(
+              { path: slug },
+              "",
+              window.location.origin + slug,
+            );
           } catch (e) {
-            console.warn("History API restricted (likely file:// protocol). Using hash routing instead.");
+            console.warn(
+              "History API restricted (likely file:// protocol). Using hash routing instead.",
+            );
             window.location.hash = slug;
           }
         }
@@ -5275,8 +5282,9 @@
 
       function handleRoute(path) {
         // Find matching route or default to main-site
-        const targetId = routes[path] || routes[path.replace(/\/$/, "")] || "main-site";
-        
+        const targetId =
+          routes[path] || routes[path.replace(/\/$/, "")] || "main-site";
+
         if (targetId === "main-site") {
           document.getElementById("main-site").style.display = "block";
           document.getElementById("a1").classList.remove("active");
@@ -5288,7 +5296,9 @@
           document.getElementById(targetId).classList.add("active");
         }
         // Force layout recalculation and scroll
-        requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "instant" }));
+        requestAnimationFrame(() =>
+          window.scrollTo({ top: 0, behavior: "instant" }),
+        );
       }
 
       window.addEventListener("popstate", () => {
