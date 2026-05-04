@@ -5298,7 +5298,9 @@
         // Force layout recalculation and scroll
         requestAnimationFrame(() => {
           window.scrollTo({ top: 0, behavior: "instant" });
-          if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+          setTimeout(() => {
+            if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh(true);
+          }, 100); // Give the browser a tick to fully render the new DOM heights
         });
       }
 
