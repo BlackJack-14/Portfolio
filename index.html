@@ -5235,97 +5235,19 @@
       );
       countEls.forEach((el) => countIO.observe(el));
 
-      // ─── PAGE ROUTING & HISTORY API ───
-      function getRootPath() {
-        if (window.location.protocol === "file:")
-          return window.location.pathname;
-        const path = window.location.pathname;
-        if (path.includes("/article/")) {
-          return path.split("/article/")[0] || "/";
-        }
-        return path.replace(/\/$/, "") || "/";
-      }
-
-      const rootPath = getRootPath();
-      const basePath = rootPath === "/" ? "" : rootPath;
-
-      const routes = {
-        [rootPath]: "main-site",
-        [rootPath + "/"]: "main-site",
-        [basePath + "/article/lora-fine-tuning"]: "a1",
-        [basePath + "/article/rag-vs-fine-tuning"]: "a2",
-      };
-
-      function getSlug(id) {
-        if (id === "main-site") return basePath || "/";
-        if (id === "a1") return basePath + "/article/lora-fine-tuning";
-        if (id === "a2") return basePath + "/article/rag-vs-fine-tuning";
-        return basePath || "/";
-      }
-
-      function updateURL(slug) {
-        if (window.location.pathname !== slug) {
-          try {
-            window.history.pushState(
-              { path: slug },
-              "",
-              window.location.origin + slug,
-            );
-          } catch (e) {
-            console.warn(
-              "History API restricted (likely file:// protocol). Using hash routing instead.",
-            );
-            window.location.hash = slug;
-          }
-        }
-      }
-
-      function handleRoute(path) {
-        // Find matching route or default to main-site
-        const targetId =
-          routes[path] || routes[path.replace(/\/$/, "")] || "main-site";
-
-        if (targetId === "main-site") {
-          document.getElementById("main-site").style.display = "block";
-          document.getElementById("a1").classList.remove("active");
-          document.getElementById("a2").classList.remove("active");
-        } else {
-          document.getElementById("main-site").style.display = "none";
-          document.getElementById("a1").classList.remove("active");
-          document.getElementById("a2").classList.remove("active");
-          document.getElementById(targetId).classList.add("active");
-        }
-        // Force layout recalculation and scroll
-        requestAnimationFrame(() => {
-          window.scrollTo({ top: 0, behavior: "instant" });
-          setTimeout(() => {
-            if (typeof ScrollTrigger !== "undefined")
-              ScrollTrigger.refresh(true);
-          }, 100); // Give the browser a tick to fully render the new DOM heights
-        });
-      }
-
-      window.addEventListener("popstate", () => {
-        handleRoute(window.location.pathname);
-      });
-
-      // Handle direct URL load
-      window.addEventListener("DOMContentLoaded", () => {
-        handleRoute(window.location.pathname);
-      });
-
+      // Page routing
       function showMain() {
-        const slug = getSlug("main-site");
-        handleRoute(slug);
-        updateURL(slug);
+        document.getElementById("main-site").style.display = "block";
+        document.getElementById("a1").classList.remove("active");
+        document.getElementById("a2").classList.remove("active");
+        window.scrollTo(0, 0);
       }
-
       function showArticle(id) {
-        const slug = getSlug(id);
-        if (slug) {
-          handleRoute(slug);
-          updateURL(slug);
-        }
+        document.getElementById("main-site").style.display = "none";
+        document.getElementById("a1").classList.remove("active");
+        document.getElementById("a2").classList.remove("active");
+        document.getElementById(id).classList.add("active");
+        window.scrollTo(0, 0);
       }
 
       // ─── CUSTOM CURSOR ───
